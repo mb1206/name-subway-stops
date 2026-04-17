@@ -3069,7 +3069,9 @@
   {
     "id": "A47",
     "name": "Kingston-Throop Avs",
-    "aliases": [],
+    "aliases": [
+      "Kingston Throop"
+    ],
     "coordinates": [
       -73.940858,
       40.679921
@@ -3082,7 +3084,9 @@
   {
     "id": "A48",
     "name": "Utica Av",
-    "aliases": [],
+    "aliases": [
+      "Utica"
+    ],
     "coordinates": [
       -73.930729,
       40.679364
