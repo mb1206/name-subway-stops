@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { findMatch } from '../lib/matching'
 import type { Stop, Toast } from '../types'
 
@@ -9,6 +9,13 @@ interface Options {
 export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
   const [guessed, setGuessed] = useState<Set<string>>(new Set())
   const [toasts, setToasts] = useState<Toast[]>([])
+  const timerIds = useRef<Set<ReturnType<typeof setTimeout>>>(new Set())
+
+  useEffect(() => {
+    return () => {
+      timerIds.current.forEach(id => clearTimeout(id))
+    }
+  }, [])
 
   const onInput = useCallback((input: string) => {
     const match = findMatch(input, stops, guessed)
@@ -18,9 +25,12 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
 
     const toast: Toast = { id: `${match.id}-${Date.now()}`, stop: match }
     setToasts(prev => [...prev, toast])
-    setTimeout(() => {
+
+    const timerId = setTimeout(() => {
+      timerIds.current.delete(timerId)
       setToasts(prev => prev.filter(t => t.id !== toast.id))
     }, 2000)
+    timerIds.current.add(timerId)
 
     onMatch?.(match)
   }, [stops, guessed, onMatch])
