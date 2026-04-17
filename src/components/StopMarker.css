@@ -44,4 +44,10 @@
   max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.stop-named:hover .stop-label {
+  opacity: 1;
 }

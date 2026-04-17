@@ -26,3 +26,16 @@ export function findMatch(
     )
   }) ?? null
 }
+
+export function findAllMatches(
+  input: string,
+  stops: Stop[],
+  guessed: Set<string>,
+): Stop[] {
+  const normalized = normalize(input)
+  if (!normalized) return []
+  return stops.filter(stop => {
+    if (guessed.has(stop.id)) return false
+    return [stop.name, ...stop.aliases].some(name => normalize(name) === normalized)
+  })
+}

@@ -92,4 +92,15 @@ describe('useQuiz', () => {
     expect(onMatch).toHaveBeenCalledOnce()
     expect(onMatch).toHaveBeenCalledWith(stop1)
   })
+
+  it('reveals all matching stops at once for a shared name', () => {
+    const multiStop1: Stop = { id: 'ms1', name: '14 St', aliases: [], coordinates: [-74, 40.7], lines: ['A', 'C', 'E'] }
+    const multiStop2: Stop = { id: 'ms2', name: '14 St', aliases: [], coordinates: [-73.99, 40.73], lines: ['L'] }
+    const multiStops = [multiStop1, multiStop2]
+    const { result } = renderHook(() => useQuiz(multiStops))
+    act(() => result.current.onInput('14th'))
+    expect(result.current.guessed.has('ms1')).toBe(true)
+    expect(result.current.guessed.has('ms2')).toBe(true)
+    expect(result.current.guessedCount).toBe(2)
+  })
 })

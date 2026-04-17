@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { normalize, findMatch } from './matching'
+import { normalize, findMatch, findAllMatches } from './matching'
 import type { Stop } from '../types'
 
 const makeStop = (name: string, aliases: string[] = [], lines = ['1'] as Stop['lines']): Stop => ({
@@ -76,5 +76,29 @@ describe('findMatch', () => {
   it('returns null for partial match', () => {
     const guessed = new Set<string>()
     expect(findMatch('Times', stops, guessed)).toBeNull()
+  })
+})
+
+describe('findAllMatches', () => {
+  const st14a: Stop = { ...makeStop('14 St', [], ['A', 'C', 'E'] as Stop['lines']), id: '14a' }
+  const st14l: Stop = { ...makeStop('14 St', [], ['L'] as Stop['lines']), id: '14l' }
+  const st14f: Stop = { ...makeStop('14 St', [], ['F', 'M'] as Stop['lines']), id: '14f' }
+  const multiStops = [st14a, st14l, st14f]
+
+  it('returns all stops matching the normalized input', () => {
+    expect(findAllMatches('14th', multiStops, new Set())).toHaveLength(3)
+  })
+
+  it('skips already-guessed stops', () => {
+    const guessed = new Set([st14a.id])
+    expect(findAllMatches('14th', multiStops, guessed)).toHaveLength(2)
+  })
+
+  it('returns empty array for no match', () => {
+    expect(findAllMatches('Grand Central', multiStops, new Set())).toHaveLength(0)
+  })
+
+  it('returns empty array for empty input', () => {
+    expect(findAllMatches('', multiStops, new Set())).toHaveLength(0)
   })
 })
