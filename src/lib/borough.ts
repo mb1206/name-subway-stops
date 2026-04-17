@@ -26,8 +26,11 @@ export function getBoroughForStop(stop: Stop): Borough {
 
   // Queens: eastern Queens (Rockaways, Jamaica, Flushing)
   if (lng > -73.865) return 'Queens'
-  // Northern Queens: LIC / Astoria — geographically close to Manhattan
-  if (lat > 40.738 && lat < 40.800 && lng > -73.955) return 'Queens'
+  // LIC (lat 40.738–40.758): catches Vernon Blvd, Court Sq, Queensboro Plaza, 7-train start
+  if (lat > 40.738 && lat < 40.758 && lng > -73.955) return 'Queens'
+  // Astoria (lat 40.758–40.800): east of the East River (~-73.937); excludes UES Lex Ave stops
+  // which are at lng -73.944 to -73.956 (Manhattan, west of the river)
+  if (lat > 40.758 && lat < 40.800 && lng > -73.937) return 'Queens'
   // Southern Queens: Ozone Park / J line east of Brooklyn border
   if (lat < 40.695 && lng > -73.870) return 'Queens'
 
