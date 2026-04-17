@@ -137,4 +137,9 @@ export const ALIASES: Record<string, string[]> = {
   'Prospect Park':                       ['Prospect Park'],
   'Kingston-Throop Avs':                 ['Kingston Throop'],
   'Utica Av':                            ['Utica'],
+  'W 4 St-Wash Sq':                     ['West 4th', 'West 4th St', 'West 4', 'W 4th', 'Washington Square', 'Wash Sq'],
+  'W 8 St-NY Aquarium':                 ['West 8th', 'West 8th St', 'West 8', 'W 8th', 'NY Aquarium'],
+  'E 180 St':                           ['East 180th', 'East 180th St', 'East 180'],
+  'E 149 St':                           ['East 149th', 'East 149th St', 'East 149'],
+  'E 143 St-St Mary\'s St':             ['East 143rd', 'East 143rd St', 'East 143', 'St Marys'],
 }
