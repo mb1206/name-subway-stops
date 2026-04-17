@@ -135,4 +135,6 @@ export const ALIASES: Record<string, string[]> = {
   'Broadway Junction':                   ['Broadway Junction'],
   'Atlantic Av':                         ['Atlantic Ave'],
   'Prospect Park':                       ['Prospect Park'],
+  'Kingston-Throop Avs':                 ['Kingston Throop'],
+  'Utica Av':                            ['Utica'],
 }

@@ -16,12 +16,25 @@ describe('normalize', () => {
   })
 
   it('trims whitespace', () => {
-    expect(normalize('  fulton st  ')).toBe('fulton st')
+    expect(normalize('  fulton st  ')).toBe('fulton')
   })
 
   it('strips hyphens and slashes', () => {
     expect(normalize('A/C/E')).toBe('a c e')
-    expect(normalize('Smith-9 Sts')).toBe('smith 9 sts')
+    expect(normalize('Smith-9 Sts')).toBe('smith 9')
+  })
+
+  it('strips ordinal suffixes from numbers', () => {
+    expect(normalize('14th')).toBe('14')
+    expect(normalize('1st')).toBe('1')
+    expect(normalize('42nd')).toBe('42')
+    expect(normalize('33rd')).toBe('33')
+  })
+
+  it('strips trailing street type suffixes', () => {
+    expect(normalize('Utica Av')).toBe('utica')
+    expect(normalize('Kingston-Throop Avs')).toBe('kingston throop')
+    expect(normalize('14 St')).toBe('14')
   })
 })
 

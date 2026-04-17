@@ -5,6 +5,8 @@ export function normalize(s: string): string {
     .toLowerCase()
     .replace(/[-/]/g, ' ')
     .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\b(\d+)(st|nd|rd|th)\b/g, '$1')
+    .replace(/\s+(av|ave|st|blvd|rd|ln|dr|ct|pl|pkwy|tpke|sts|avs)\s*$/g, '')
     .replace(/\s+/g, ' ')
     .trim()
 }
