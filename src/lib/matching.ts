@@ -1,23 +1,32 @@
 import type { Stop } from '../types'
+import { ALIASES } from '../data/aliases'
 
 export function normalize(s: string): string {
   return s
     .toLowerCase()
     .replace(/[-/]/g, ' ')
     .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\bhts\b/g, 'heights')
     .replace(/\b(\d+)(st|nd|rd|th)\b/g, '$1')
-    .replace(/\s+(av|ave|st|blvd|rd|ln|dr|ct|pl|pkwy|tpke|sts|avs)\s*$/g, '')
+    .replace(/\s+(av|ave|avs|sts|st|blvd|boulevard|rd|ln|dr|ct|pl|pkwy|pkway|parkway|tpke|turnpike)\s*$/g, '')
     .replace(/\s+/g, ' ')
     .trim()
 }
 
+function getAliases(stop: Stop): string[] {
+  const extra = ALIASES[stop.name] ?? []
+  if (extra.length === 0) return stop.aliases
+  const seen = new Set(stop.aliases)
+  return [...stop.aliases, ...extra.filter(a => !seen.has(a))]
+}
+
 function stopMatchesNormalized(stop: Stop, normalized: string): boolean {
-  if ([stop.name, ...stop.aliases].some(name => normalize(name) === normalized)) return true
-  // Also match against the first segment of compound names like "34 St-Penn Station" → "34 St"
-  const dashIdx = stop.name.indexOf('-')
-  if (dashIdx > 0) {
-    const firstPart = stop.name.slice(0, dashIdx).trim()
-    if (normalize(firstPart) === normalized) return true
+  // Match full name or any alias
+  if ([stop.name, ...getAliases(stop)].some(name => normalize(name) === normalized)) return true
+  // Match any hyphen-split segment individually
+  const segments = stop.name.split('-')
+  if (segments.length > 1) {
+    return segments.some(seg => normalize(seg.trim()) === normalized)
   }
   return false
 }

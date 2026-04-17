@@ -2,4 +2,32 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+
+  /* Dark theme (streets) — default */
+  --ui-bg:           rgba(15, 20, 40, 0.92);
+  --ui-bg-solid:     rgba(12, 16, 34, 0.97);
+  --ui-border:       rgba(255, 255, 255, 0.08);
+  --ui-border-input: rgba(255, 255, 255, 0.15);
+  --ui-text:         #fff;
+  --ui-text-secondary: #a0aec0;
+  --ui-text-dim:     #4a5568;
+  --ui-hover:        rgba(255, 255, 255, 0.04);
+  --ui-progress-track: rgba(255, 255, 255, 0.10);
+  --ui-scrollbar:    rgba(255, 255, 255, 0.12);
+  --ui-placeholder:  #4a5568;
+}
+
+/* Light theme (schematic) */
+.app[data-theme="light"] {
+  --ui-bg:           rgba(252, 251, 248, 0.94);
+  --ui-bg-solid:     rgba(248, 247, 244, 0.98);
+  --ui-border:       rgba(0, 0, 0, 0.08);
+  --ui-border-input: rgba(0, 0, 0, 0.18);
+  --ui-text:         #1a202c;
+  --ui-text-secondary: #4a5568;
+  --ui-text-dim:     #a0aec0;
+  --ui-hover:        rgba(0, 0, 0, 0.04);
+  --ui-progress-track: rgba(0, 0, 0, 0.08);
+  --ui-scrollbar:    rgba(0, 0, 0, 0.12);
+  --ui-placeholder:  #a0aec0;
 }

@@ -31,6 +31,10 @@ describe('normalize', () => {
     expect(normalize('33rd')).toBe('33')
   })
 
+  it('expands Hts abbreviation to heights', () => {
+    expect(normalize('Jackson Hts')).toBe('jackson heights')
+  })
+
   it('strips trailing street type suffixes', () => {
     expect(normalize('Utica Av')).toBe('utica')
     expect(normalize('Kingston-Throop Avs')).toBe('kingston throop')
@@ -102,8 +106,42 @@ describe('findAllMatches', () => {
     expect(findAllMatches('', multiStops, new Set())).toHaveLength(0)
   })
 
-  it('matches via first segment of compound name', () => {
-    const pennStation: Stop = { ...makeStop('34 St-Penn Station', [], ['1', '2', '3'] as Stop['lines']), id: 'penn' }
+  it('matches via explicit alias on compound name', () => {
+    const pennStation: Stop = { ...makeStop('34 St-Penn Station', ['34 St'], ['1', '2', '3'] as Stop['lines']), id: 'penn' }
     expect(findAllMatches('34th st', [pennStation], new Set())).toHaveLength(1)
+  })
+
+  it('matches via multi-word segment of compound name', () => {
+    const stop = makeStop('15 St-Prospect Park', [])
+    expect(findAllMatches('prospect park', [stop], new Set())).toHaveLength(1)
+    expect(findAllMatches('15th st', [stop], new Set())).toHaveLength(1)
+    expect(findAllMatches('15 st', [stop], new Set())).toHaveLength(1)
+  })
+
+  it('matches via pure-number segment of compound name', () => {
+    const stop = makeStop('Marble Hill-225 St', [])
+    expect(findAllMatches('225', [stop], new Set())).toHaveLength(1)
+  })
+
+  it('matches both standalone and compound stop sharing a word', () => {
+    const compound = makeStop('Bedford-Nostrand Avs', [])
+    const standalone = makeStop('Bedford Av', [])
+    const results = findAllMatches('bedford', [compound, standalone], new Set())
+    expect(results).toHaveLength(2)
+    expect(results.map(r => r.name)).toContain('Bedford Av')
+    expect(results.map(r => r.name)).toContain('Bedford-Nostrand Avs')
+  })
+
+  it('matches single-word segment of compound name', () => {
+    const stop = makeStop('President St-Medgar Evers College', [])
+    expect(findAllMatches('president', [stop], new Set())).toHaveLength(1)
+    expect(findAllMatches('medgar evers college', [stop], new Set())).toHaveLength(1)
+  })
+
+  it('matches compound stop alongside standalone when both share a segment', () => {
+    const compound = makeStop('90 St-Elmhurst Av', [])
+    const standalone = makeStop('Elmhurst Av', [])
+    const results = findAllMatches('elmhurst', [compound, standalone], new Set())
+    expect(results).toHaveLength(2)
   })
 })

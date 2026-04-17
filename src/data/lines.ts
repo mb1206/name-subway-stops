@@ -1,5 +1,12 @@
 import type { LineId } from '../types'
 
+// Lines whose background color is light enough to require dark text
+const LIGHT_BG_LINES = new Set<LineId>(['N', 'Q', 'R', 'W'])
+
+export function lineTextColor(line: LineId): string {
+  return LIGHT_BG_LINES.has(line) ? '#000' : '#fff'
+}
+
 export const LINE_COLORS: Record<LineId, string> = {
   '1': '#EE352E', '2': '#EE352E', '3': '#EE352E',
   '4': '#00933C', '5': '#00933C', '6': '#00933C', '6X': '#00933C',

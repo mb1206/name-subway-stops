@@ -22,13 +22,7 @@ const stops: Stop[] = [
 
 describe('QuizMap', () => {
   it('renders a marker for every stop', () => {
-    render(
-      <QuizMap
-        stops={stops}
-        guessed={new Set()}
-        mapStyle="streets"
-      />
-    )
+    render(<QuizMap stops={stops} guessed={new Set()} mapStyle="streets" />)
     expect(screen.getAllByTestId('marker')).toHaveLength(2)
   })
 

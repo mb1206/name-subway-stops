@@ -1,0 +1,36 @@
+.style-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 16px;
+  z-index: 15;
+  display: flex;
+  background: var(--ui-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--ui-border-input);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 2px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.style-toggle-opt {
+  padding: 5px 12px;
+  border-radius: 16px;
+  border: none;
+  background: none;
+  color: var(--ui-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.style-toggle-opt:hover:not(.style-toggle-opt--active) {
+  color: var(--ui-text);
+}
+
+.style-toggle-opt--active {
+  background: var(--ui-text);
+  color: var(--ui-bg-solid);
+  cursor: default;
+}

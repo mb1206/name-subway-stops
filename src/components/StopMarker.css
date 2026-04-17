@@ -7,16 +7,39 @@
 }
 
 .stop-named {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
+  position: relative;
   animation: pop-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes pop-in {
   from { transform: scale(0.4); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
+}
+
+.stop-hover-popup {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.stop-named:hover .stop-hover-popup {
+  opacity: 1;
+}
+
+.stop-dot-primary {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .stop-dots {
@@ -40,14 +63,7 @@
   background: rgba(20, 22, 45, 0.88);
   padding: 1px 3px;
   border-radius: 2px;
-  pointer-events: none;
   max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-.stop-named:hover .stop-label {
-  opacity: 1;
 }

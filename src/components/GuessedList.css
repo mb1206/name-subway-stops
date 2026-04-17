@@ -1,0 +1,150 @@
+.sidebar {
+  position: fixed;
+  top: 40px;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  width: 260px;
+  background: var(--ui-bg-solid);
+  backdrop-filter: blur(12px);
+  border-left: 1px solid var(--ui-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* ── Stats section ─────────────────────────────── */
+
+.sidebar-stats {
+  padding: 16px 14px 14px;
+  border-bottom: 1px solid var(--ui-border);
+  flex-shrink: 0;
+}
+
+.sidebar-count {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.sidebar-count-main {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ui-text);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
+}
+
+.sidebar-count-sep {
+  font-size: 14px;
+  color: var(--ui-text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar-count-pct {
+  font-size: 14px;
+  color: var(--ui-text-secondary);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar-progress {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.sidebar-seg {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ui-progress-track);
+  transition: background 0.25s ease;
+}
+
+.sidebar-seg--filled {
+  background: #f6c90e;
+}
+
+.sidebar-label {
+  font-size: 11px;
+  color: var(--ui-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* ── Stop list ─────────────────────────────────── */
+
+.sidebar-body {
+  overflow-y: scroll;
+  flex: 1;
+  padding: 4px 0;
+}
+
+.sidebar-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-body::-webkit-scrollbar-thumb {
+  background: var(--ui-scrollbar);
+  border-radius: 2px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  gap: 8px;
+}
+
+.sidebar-item:hover {
+  background: var(--ui-hover);
+}
+
+.sidebar-name {
+  font-size: 13px;
+  color: var(--ui-text);
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.sidebar-dots {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.sidebar-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.sidebar-empty {
+  color: var(--ui-text-dim);
+  font-size: 13px;
+  text-align: center;
+  padding: 20px 14px;
+  margin: 0;
+}

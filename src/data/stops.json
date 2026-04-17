@@ -679,7 +679,11 @@
   {
     "id": "213",
     "name": "E 180 St",
-    "aliases": [],
+    "aliases": [
+      "East 180th",
+      "East 180th St",
+      "East 180"
+    ],
     "coordinates": [
       -73.873488,
       40.841894
@@ -1800,7 +1804,11 @@
   {
     "id": "615",
     "name": "E 149 St",
-    "aliases": [],
+    "aliases": [
+      "East 149th",
+      "East 149th St",
+      "East 149"
+    ],
     "coordinates": [
       -73.904098,
       40.812118
@@ -1812,7 +1820,12 @@
   {
     "id": "616",
     "name": "E 143 St-St Mary's St",
-    "aliases": [],
+    "aliases": [
+      "East 143rd",
+      "East 143rd St",
+      "East 143",
+      "St Marys"
+    ],
     "coordinates": [
       -73.907657,
       40.808719
@@ -2886,7 +2899,14 @@
   {
     "id": "A32",
     "name": "W 4 St-Wash Sq",
-    "aliases": [],
+    "aliases": [
+      "West 4th",
+      "West 4th St",
+      "West 4",
+      "W 4th",
+      "Washington Square",
+      "Wash Sq"
+    ],
     "coordinates": [
       -74.000495,
       40.732338
@@ -3783,7 +3803,14 @@
   {
     "id": "D20",
     "name": "W 4 St-Wash Sq",
-    "aliases": [],
+    "aliases": [
+      "West 4th",
+      "West 4th St",
+      "West 4",
+      "W 4th",
+      "Washington Square",
+      "Wash Sq"
+    ],
     "coordinates": [
       -74.000495,
       40.732338
@@ -4064,7 +4091,13 @@
   {
     "id": "D42",
     "name": "W 8 St-NY Aquarium",
-    "aliases": [],
+    "aliases": [
+      "West 8th",
+      "West 8th St",
+      "West 8",
+      "W 8th",
+      "NY Aquarium"
+    ],
     "coordinates": [
       -73.975939,
       40.576127
