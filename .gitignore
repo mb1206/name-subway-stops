@@ -1,6 +1,5 @@
 node_modules/
 dist/
 .superpowers/
-/src/data/stops.json
 *.swp
 *.tsbuildinfo
