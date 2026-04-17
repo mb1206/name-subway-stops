@@ -14,7 +14,7 @@ export function Header({ guessedCount, totalCount, mapStyle, onToggleStyle }: Pr
       <span className="header-title">Name the Subway Stops</span>
       <span className="header-counter">{guessedCount} / {totalCount}</span>
       <button className="header-toggle" onClick={onToggleStyle} aria-label="Map style toggle">
-        {mapStyle === 'streets' ? 'Schematic' : 'Streets'}
+        {mapStyle === 'streets' ? 'Schematic' : 'Dark'}
       </button>
     </header>
   )
