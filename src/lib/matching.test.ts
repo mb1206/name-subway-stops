@@ -101,4 +101,9 @@ describe('findAllMatches', () => {
   it('returns empty array for empty input', () => {
     expect(findAllMatches('', multiStops, new Set())).toHaveLength(0)
   })
+
+  it('matches via first segment of compound name', () => {
+    const pennStation: Stop = { ...makeStop('34 St-Penn Station', [], ['1', '2', '3'] as Stop['lines']), id: 'penn' }
+    expect(findAllMatches('34th st', [pennStation], new Set())).toHaveLength(1)
+  })
 })

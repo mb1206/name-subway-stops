@@ -11,6 +11,17 @@ export function normalize(s: string): string {
     .trim()
 }
 
+function stopMatchesNormalized(stop: Stop, normalized: string): boolean {
+  if ([stop.name, ...stop.aliases].some(name => normalize(name) === normalized)) return true
+  // Also match against the first segment of compound names like "34 St-Penn Station" → "34 St"
+  const dashIdx = stop.name.indexOf('-')
+  if (dashIdx > 0) {
+    const firstPart = stop.name.slice(0, dashIdx).trim()
+    if (normalize(firstPart) === normalized) return true
+  }
+  return false
+}
+
 export function findMatch(
   input: string,
   stops: Stop[],
@@ -18,13 +29,7 @@ export function findMatch(
 ): Stop | null {
   const normalized = normalize(input)
   if (!normalized) return null
-
-  return stops.find(stop => {
-    if (guessed.has(stop.id)) return false
-    return [stop.name, ...stop.aliases].some(
-      name => normalize(name) === normalized
-    )
-  }) ?? null
+  return stops.find(stop => !guessed.has(stop.id) && stopMatchesNormalized(stop, normalized)) ?? null
 }
 
 export function findAllMatches(
@@ -34,8 +39,5 @@ export function findAllMatches(
 ): Stop[] {
   const normalized = normalize(input)
   if (!normalized) return []
-  return stops.filter(stop => {
-    if (guessed.has(stop.id)) return false
-    return [stop.name, ...stop.aliases].some(name => normalize(name) === normalized)
-  })
+  return stops.filter(stop => !guessed.has(stop.id) && stopMatchesNormalized(stop, normalized))
 }
