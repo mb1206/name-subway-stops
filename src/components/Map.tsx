@@ -1,6 +1,7 @@
 import { Map } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { StopMarker } from './StopMarker'
+import { RouteSegments } from './RouteSegments'
 import { STREETS_STYLE } from '../styles/streets-style'
 import { SCHEMATIC_STYLE } from '../styles/schematic-style'
 import type { Stop, MapStyleId } from '../types'
@@ -34,6 +35,7 @@ export function QuizMap({ stops, guessed, mapStyle }: Props) {
           named={guessed.has(stop.id)}
         />
       ))}
+      <RouteSegments guessed={guessed} />
     </Map>
   )
 }

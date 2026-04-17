@@ -15,3 +15,11 @@ export function Marker({ children, longitude, latitude }: {
     </div>
   )
 }
+
+export function Source({ children }: { children?: ReactNode; [key: string]: unknown }) {
+  return <div data-testid="source">{children}</div>
+}
+
+export function Layer(_props: unknown) {
+  return null
+}
