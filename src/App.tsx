@@ -15,8 +15,10 @@ const stops = stopsData as Stop[]
 export default function App() {
   const [mapStyle, setMapStyle] = useState<MapStyleId>('streets')
   const [resetKey, setResetKey] = useState(0)
+  const [hoveredStopId, setHoveredStopId] = useState<string | null>(null)
+  const [showBoroughDebug, setShowBoroughDebug] = useState(false)
 
-  const { guessed, guessedStops, toasts, onInput, checkAlreadyGuessed, guessedCount, totalCount } = useQuiz(stops, {
+  const { guessed, guessedStops, toasts, onInput, checkAlreadyGuessed, reset, guessedCount, totalCount } = useQuiz(stops, {
     onMatch: useCallback(() => setResetKey(k => k + 1), []),
   })
 
@@ -26,12 +28,12 @@ export default function App() {
 
   return (
     <div className="app" data-theme={mapStyle === 'schematic' ? 'light' : 'dark'}>
-      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} />
-      <Header />
+      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} showBoroughDebug={showBoroughDebug} />
+      <Header guessedCount={guessedCount} totalCount={totalCount} />
       <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} />
       <ToastStack toasts={toasts} />
-      <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} />
-      <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} />
+      <GuessedList stops={guessedStops} allStops={stops} guessedCount={guessedCount} totalCount={totalCount} onStopHover={setHoveredStopId} />
+      <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} showBoroughDebug={showBoroughDebug} onToggleBoroughDebug={() => setShowBoroughDebug(v => !v)} />
     </div>
   )
 }

@@ -12,7 +12,7 @@ export function ToastStack({ toasts }: Props) {
   return (
     <div className="toast-stack">
       {toasts.map(toast => (
-        <div key={toast.id} className="toast">
+        <div key={toast.id} className={`toast${toast.fading ? ' toast--fading' : ''}`}>
           <span className="toast-name">{toast.stop.name}</span>
           <span className="toast-lines">
             {toast.stop.lines.map(line => (

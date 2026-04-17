@@ -1,0 +1,68 @@
+import type { Stop } from '../types'
+
+export type Borough = 'Manhattan' | 'Bronx' | 'Brooklyn' | 'Queens' | 'Staten Island'
+
+export const BOROUGHS: Borough[] = ['Manhattan', 'Bronx', 'Brooklyn', 'Queens', 'Staten Island']
+
+export const BOROUGH_SHORT: Record<Borough, string> = {
+  'Manhattan': 'Manhattan',
+  'Bronx': 'Bronx',
+  'Brooklyn': 'Brooklyn',
+  'Queens': 'Queens',
+  'Staten Island': 'Staten Is.',
+}
+
+// Inwood/Washington Heights 1/A train stops that sit east of the Harlem River
+// longitude threshold but are in Manhattan borough.
+const MANHATTAN_UPPER_IDS = new Set(['A03', '109', 'A02', '108', '107'])
+
+export function getBoroughForStop(stop: Stop): Borough {
+  const [lng, lat] = stop.coordinates
+
+  if (stop.lines.includes('SIR')) return 'Staten Island'
+
+  // Bronx: north of Harlem River, east of upper Manhattan corridor
+  if (lat > 40.803 && lng > -73.929 && !MANHATTAN_UPPER_IDS.has(stop.id)) return 'Bronx'
+
+  // Queens: eastern Queens (Rockaways, Jamaica, Flushing)
+  if (lng > -73.865) return 'Queens'
+  // Northern Queens: LIC / Astoria — geographically close to Manhattan
+  if (lat > 40.738 && lat < 40.800 && lng > -73.955) return 'Queens'
+  // Southern Queens: Ozone Park / J line east of Brooklyn border
+  if (lat < 40.695 && lng > -73.870) return 'Queens'
+
+  // Brooklyn (Queens rules above must fire first to avoid overlap in lat 40.738-40.755)
+  if (lat < 40.695) return 'Brooklyn'                          // south Brooklyn
+  if (lat < 40.704 && lng > -73.994) return 'Brooklyn'        // Brooklyn Heights, DUMBO
+  if (lat < 40.720 && lng > -73.960) return 'Brooklyn'        // Williamsburg
+  if (lat < 40.755 && lng > -73.955) return 'Brooklyn'        // Greenpoint, northern Brooklyn
+
+  return 'Manhattan'
+}
+
+export interface BoroughStat {
+  borough: Borough
+  guessed: number
+  total: number
+  pct: number
+}
+
+export function computeBoroughStats(guessedStops: Stop[], allStops: Stop[]): BoroughStat[] {
+  const allByBorough = new Map<Borough, number>(BOROUGHS.map(b => [b, 0]))
+  const guessedByBorough = new Map<Borough, number>(BOROUGHS.map(b => [b, 0]))
+
+  for (const stop of allStops) {
+    const b = getBoroughForStop(stop)
+    allByBorough.set(b, (allByBorough.get(b) ?? 0) + 1)
+  }
+  for (const stop of guessedStops) {
+    const b = getBoroughForStop(stop)
+    guessedByBorough.set(b, (guessedByBorough.get(b) ?? 0) + 1)
+  }
+
+  return BOROUGHS.map(b => {
+    const total = allByBorough.get(b) ?? 0
+    const guessed = guessedByBorough.get(b) ?? 0
+    return { borough: b, guessed, total, pct: total > 0 ? Math.round(guessed / total * 100) : 0 }
+  })
+}

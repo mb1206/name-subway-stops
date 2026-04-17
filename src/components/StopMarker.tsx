@@ -6,13 +6,14 @@ import './StopMarker.css'
 interface Props {
   stop: Stop
   named: boolean
+  highlighted?: boolean
 }
 
-export function StopMarker({ stop, named }: Props) {
+export function StopMarker({ stop, named, highlighted }: Props) {
   return (
     <Marker longitude={stop.coordinates[0]} latitude={stop.coordinates[1]} anchor="center">
       {named ? (
-        <div className="stop-named">
+        <div className={`stop-named${highlighted ? ' stop-named--highlighted' : ''}`}>
           <div className="stop-hover-popup">
             <span className="stop-label">{stop.name}</span>
             <div className="stop-dots">

@@ -40,6 +40,22 @@
   border-radius: 50%;
   display: block;
   border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.stop-named--highlighted .stop-dot-primary {
+  transform: scale(1.8);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.stop-named--highlighted .stop-hover-popup {
+  opacity: 1;
+}
+
+/* Lift the entire MapLibre marker to the top when its label is visible */
+.maplibregl-marker:has(.stop-named:hover),
+.maplibregl-marker:has(.stop-named--highlighted) {
+  z-index: 100 !important;
 }
 
 .stop-dots {
@@ -56,14 +72,17 @@
 }
 
 .stop-label {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   color: #e2e8f0;
   white-space: nowrap;
-  background: rgba(20, 22, 45, 0.88);
-  padding: 1px 3px;
-  border-radius: 2px;
-  max-width: 120px;
+  background: rgba(15, 18, 40, 0.92);
+  padding: 4px 10px;
+  border-radius: 12px;
+  max-width: 160px;
   overflow: hidden;
   text-overflow: ellipsis;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.01em;
 }

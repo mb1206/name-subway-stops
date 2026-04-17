@@ -1,8 +1,16 @@
-.style-toggle {
+.settings-wrap {
   position: fixed;
-  bottom: 24px;
+  bottom: 12px;
   left: 16px;
   z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+
+.style-toggle {
   display: flex;
   background: var(--ui-bg);
   backdrop-filter: blur(8px);
@@ -33,4 +41,36 @@
   background: var(--ui-text);
   color: var(--ui-bg-solid);
   cursor: default;
+}
+
+.style-toggle-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--ui-border-input);
+  margin: 2px 1px;
+}
+
+.style-toggle-reset {
+  color: var(--ui-text-dim);
+}
+
+.style-toggle-reset:hover {
+  color: #e53e3e;
+}
+
+.map-attribution {
+  font-size: 10px;
+  color: var(--ui-text-dim);
+  margin: 0;
+  padding: 0 4px;
+  line-height: 1.4;
+}
+
+.map-attribution a {
+  color: var(--ui-text-secondary);
+  text-decoration: none;
+}
+
+.map-attribution a:hover {
+  text-decoration: underline;
 }

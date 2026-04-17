@@ -22,7 +22,7 @@ const stop2: Stop = {
 const stops = [stop1, stop2]
 
 describe('useQuiz', () => {
-  beforeEach(() => vi.useFakeTimers())
+  beforeEach(() => { vi.useFakeTimers(); localStorage.clear() })
   afterEach(() => vi.useRealTimers())
 
   it('starts with no guessed stops', () => {

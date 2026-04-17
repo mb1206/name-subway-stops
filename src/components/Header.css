@@ -4,18 +4,79 @@
   left: 0;
   right: 0;
   z-index: 10;
-  height: 40px;
   background: var(--ui-bg);
   backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
   color: var(--ui-text);
   font-size: 14px;
   border-bottom: 1px solid var(--ui-border);
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+.header-main {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
 .header-title {
   font-weight: 600;
+}
+
+/* Mobile stats row — hidden on desktop */
+.header-mobile-stats {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .header-mobile-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 2px 16px 10px;
+  }
+
+  .header-mobile-count {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+
+  .header-mobile-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ui-text);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .header-mobile-sep {
+    font-size: 13px;
+    color: var(--ui-text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header-mobile-pct {
+    font-size: 13px;
+    color: var(--ui-text-secondary);
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header-mobile-progress {
+    display: flex;
+    gap: 2px;
+  }
+
+  .header-seg {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--ui-progress-track);
+    transition: background 0.25s ease;
+  }
+
+  .header-seg--filled {
+    background: #f6c90e;
+  }
 }

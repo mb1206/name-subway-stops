@@ -21,6 +21,7 @@ export interface Stop {
 export interface Toast {
   id: string
   stop: Stop
+  fading?: boolean
 }
 
 export type MapStyleId = 'streets' | 'schematic'

@@ -1,4 +1,5 @@
 import { LINE_COLORS, lineTextColor } from '../data/lines'
+import { computeBoroughStats, BOROUGH_SHORT } from '../lib/borough'
 import type { Stop } from '../types'
 import './GuessedList.css'
 
@@ -6,13 +7,16 @@ const SEGMENTS = 40
 
 interface Props {
   stops: Stop[]
+  allStops: Stop[]
   guessedCount: number
   totalCount: number
+  onStopHover: (id: string | null) => void
 }
 
-export function GuessedList({ stops, guessedCount, totalCount }: Props) {
+export function GuessedList({ stops, allStops, guessedCount, totalCount, onStopHover }: Props) {
   const pct = totalCount > 0 ? Math.round(guessedCount / totalCount * 100) : 0
   const filled = totalCount > 0 ? Math.round(guessedCount / totalCount * SEGMENTS) : 0
+  const boroughStats = computeBoroughStats(stops, allStops)
 
   return (
     <aside className="sidebar" aria-label="Guessed stops">
@@ -27,8 +31,16 @@ export function GuessedList({ stops, guessedCount, totalCount }: Props) {
             <span key={i} className={`sidebar-seg${i < filled ? ' sidebar-seg--filled' : ''}`} />
           ))}
         </div>
-        <div className="sidebar-label">
-          {guessedCount} stop{guessedCount !== 1 ? 's' : ''} named
+        <div className="sidebar-borough-stats">
+          {boroughStats.map(({ borough, pct: bPct }) => (
+            <div key={borough} className="sidebar-borough-row">
+              <span className="sidebar-borough-name">{BOROUGH_SHORT[borough]}</span>
+              <div className="sidebar-borough-bar">
+                <div className="sidebar-borough-fill" style={{ width: `${bPct}%` }} />
+              </div>
+              <span className="sidebar-borough-pct">{bPct}%</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -37,7 +49,12 @@ export function GuessedList({ stops, guessedCount, totalCount }: Props) {
           <p className="sidebar-empty">Start typing to name stops.</p>
         ) : (
           [...stops].reverse().map(stop => (
-            <div key={stop.id} className="sidebar-item">
+            <div
+              key={stop.id}
+              className="sidebar-item"
+              onMouseEnter={() => onStopHover(stop.id)}
+              onMouseLeave={() => onStopHover(null)}
+            >
               <span className="sidebar-name">{stop.name}</span>
               <div className="sidebar-dots">
                 {stop.lines.map(line => (

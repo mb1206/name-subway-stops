@@ -1,3 +1,8 @@
 .maplibregl-canvas {
   outline: none;
 }
+
+.maplibregl-canvas-container.maplibregl-interactive,
+.maplibregl-canvas-container.maplibregl-interactive:active {
+  cursor: default !important;
+}

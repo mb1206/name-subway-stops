@@ -4,7 +4,7 @@ import { Header } from './Header'
 
 describe('Header', () => {
   it('renders the title', () => {
-    render(<Header />)
+    render(<Header guessedCount={0} totalCount={472} />)
     expect(screen.getByText('Name the Subway Stops')).toBeInTheDocument()
   })
 })
