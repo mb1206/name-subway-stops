@@ -1,7 +1,7 @@
 import { Map } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { StopMarker } from './StopMarker'
-import { STREETS_STYLE_URL } from '../styles/streets-style'
+import { STREETS_STYLE } from '../styles/streets-style'
 import { SCHEMATIC_STYLE } from '../styles/schematic-style'
 import type { Stop, MapStyleId } from '../types'
 import './Map.css'
@@ -19,7 +19,7 @@ const INITIAL_VIEW = {
 }
 
 export function QuizMap({ stops, guessed, mapStyle }: Props) {
-  const style = mapStyle === 'streets' ? STREETS_STYLE_URL : SCHEMATIC_STYLE
+  const style = mapStyle === 'streets' ? STREETS_STYLE : SCHEMATIC_STYLE
 
   return (
     <Map
