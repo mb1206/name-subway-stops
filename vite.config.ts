@@ -8,5 +8,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/test-setup.ts'],
     globals: true,
+    alias: {
+      'react-map-gl/maplibre': '/src/test-mocks/react-map-gl.tsx',
+      'react-map-gl': '/src/test-mocks/react-map-gl.tsx',
+    },
   },
 })

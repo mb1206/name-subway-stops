@@ -1,0 +1,47 @@
+.stop-dot-unnamed {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4a5568;
+  cursor: default;
+}
+
+.stop-named {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  animation: pop-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.stop-dots {
+  display: flex;
+  gap: 2px;
+}
+
+.stop-dot-named {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.stop-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: #1a202c;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 1px 3px;
+  border-radius: 2px;
+  pointer-events: none;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
