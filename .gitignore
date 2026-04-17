@@ -3,3 +3,4 @@ dist/
 .superpowers/
 /src/data/stops.json
 *.swp
+*.tsbuildinfo
