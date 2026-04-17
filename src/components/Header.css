@@ -1,0 +1,40 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: 44px;
+  background: rgba(15, 20, 40, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.header-title {
+  font-weight: 600;
+  flex: 1;
+}
+
+.header-counter {
+  font-variant-numeric: tabular-nums;
+  color: #a0aec0;
+}
+
+.header-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.header-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
