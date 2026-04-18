@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BOROUGH_SHORT } from '../lib/borough'
 import type { BoroughStat } from '../lib/borough'
 import './ShareModal.css'
@@ -15,6 +16,15 @@ interface Props {
 }
 
 export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles, boroughStats, onClose }: Props) {
+  const [copied, setCopied] = useState(false)
+
+  function handleCopy() {
+    navigator.clipboard.writeText(`https://${APP_URL}`).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
+
   const pct = totalCount > 0 ? Math.round(guessedCount / totalCount * 100) : 0
   const filled = totalCount > 0 ? Math.round(guessedCount / totalCount * SEGMENTS) : 0
   const milesDisplay = Math.round(milesUnlocked) >= totalMiles ? totalMiles : milesUnlocked.toFixed(1)
@@ -65,6 +75,18 @@ export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles
 
         <div className="share-footer">
           <span className="share-url">{APP_URL}</span>
+          <button className="share-copy-btn" onClick={handleCopy} aria-label="Copy link">
+            {copied ? (
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                <path d="M2 7l3 3 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            ) : (
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                <rect x="4.5" y="1" width="7.5" height="8.5" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
+                <path d="M1 4.5h2M1 4.5v7h7v-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+              </svg>
+            )}
+          </button>
         </div>
       </div>
     </div>
