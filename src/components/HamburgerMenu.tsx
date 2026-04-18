@@ -31,12 +31,8 @@ export function HamburgerMenu() {
 
       {open && (
         <div className="hamburger-panel">
-          <p className="hamburger-heading">About</p>
           <p className="hamburger-body">
-            Made by <strong>Meredith</strong> — name every NYC subway stop from memory.
-          </p>
-          <p className="hamburger-body">
-            Heavily inspired by{' '}
+            Name NYC subway stops from memory! Made by Meredith. Heavily inspired by{' '}
             <a
               href="https://carvin.github.io/sf-street-names/#"
               target="_blank"
@@ -44,8 +40,7 @@ export function HamburgerMenu() {
               className="hamburger-link"
             >
               SF Street Names
-            </a>{' '}
-            by carvin.
+            </a>.
           </p>
           <a
             href="https://buymeacoffee.com/mb1206"
