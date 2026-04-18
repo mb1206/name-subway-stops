@@ -14,7 +14,7 @@ export const BOROUGH_SHORT: Record<Borough, string> = {
 
 // Inwood/Washington Heights 1/A train stops that sit east of the Harlem River
 // longitude threshold but are in Manhattan borough.
-const MANHATTAN_UPPER_IDS = new Set(['A03', '109', 'A02', '108', '107'])
+const MANHATTAN_UPPER_IDS = new Set(['A03', '109', 'A02', '108', '107', '110'])
 
 // Grant Av (A57) is in Brooklyn despite sitting east of the J-train Queens stops
 // at the same latitude — no longitude threshold cleanly separates them.
