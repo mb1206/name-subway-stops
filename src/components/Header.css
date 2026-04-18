@@ -21,7 +21,8 @@
   .header-bar {
     display: flex;
     align-items: center;
-    padding: 16px 16px 6px 52px; /* left room for the floating hamburger button */
+    padding: 16px 16px 6px var(--header-gutter);
+    /* left room for the floating hamburger button */
     gap: 8px;
   }
 
@@ -33,20 +34,20 @@
   }
 
   .header-count-num {
-    font-size: 20px;
+    font-size: 50px;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
 
   .header-count-sep {
-    font-size: 13px;
+    font-size: 20px;
     color: var(--ui-text-dim);
     font-variant-numeric: tabular-nums;
   }
 
   .header-count-pct {
-    font-size: 13px;
+    font-size: 20px;
     color: var(--ui-text-secondary);
     font-variant-numeric: tabular-nums;
     margin-left: 4px;
@@ -98,7 +99,7 @@
   .header-dots {
     display: flex;
     gap: 2px;
-    padding: 0 16px 10px;
+    padding: 0 16px 10px var(--header-gutter);
   }
 
   .header-seg {

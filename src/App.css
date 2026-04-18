@@ -1,3 +1,10 @@
+:root {
+  /* Layout constants — referenced across components */
+  --sidebar-width: 260px;      /* desktop right sidebar */
+  --header-gutter: 60px;       /* mobile: space reserved for the hamburger column */
+  --input-height-est: 52px;    /* mobile: estimated input height for toast clearance */
+}
+
 .app {
   position: relative;
   width: 100vw;

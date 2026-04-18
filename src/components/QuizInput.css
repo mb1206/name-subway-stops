@@ -1,10 +1,10 @@
 .quiz-input-container {
   position: fixed;
   top: 24px;
-  right: calc(260px + 16px);
+  right: calc(var(--sidebar-width) + 16px);
   left: auto;
   z-index: 10;
-  width: min(380px, calc(100vw - 260px - 56px));
+  width: min(380px, calc(100vw - var(--sidebar-width) - 56px));
 }
 
 .quiz-input {
@@ -61,18 +61,19 @@
   font-weight: 600;
 }
 
-/* ── Mobile: stay at top, full width, below expanded header ── */
+/* ── Mobile: anchor to bottom, above keyboard ── */
 @media (max-width: 767px) {
   .quiz-input-container {
-    top: 68px;
+    top: auto;
+    bottom: calc(var(--keyboard-offset, 0px) + 16px);
     left: 16px;
-    right: auto;
-    width: calc(100vw - 32px);
-    transition: top 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    right: 16px;
+    width: auto;
   }
 
-  /* Push input down when borough detail panel is expanded */
-  .app:has(.header-detail) .quiz-input-container {
-    top: 226px;
+  /* Hint appears above the input on mobile */
+  .quiz-input-hint {
+    top: auto;
+    bottom: calc(100% + 6px);
   }
 }

@@ -1,9 +1,23 @@
 import { useState, useRef, useEffect } from 'react'
+import type { MapStyleId } from '../types'
 import './HamburgerMenu.css'
 
-export function HamburgerMenu() {
+interface Props {
+  mapStyle: MapStyleId
+  onToggleStyle: () => void
+  onReset: () => void
+}
+
+export function HamburgerMenu({ mapStyle, onToggleStyle, onReset }: Props) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+
+  function handleReset() {
+    if (window.confirm('Reset all progress? This cannot be undone.')) {
+      onReset()
+      setOpen(false)
+    }
+  }
 
   useEffect(() => {
     if (!open) return
@@ -23,16 +37,16 @@ export function HamburgerMenu() {
         aria-expanded={open}
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-          <rect x="2" y="4"  width="14" height="1.8" rx="0.9" fill="currentColor"/>
-          <rect x="2" y="8.1" width="14" height="1.8" rx="0.9" fill="currentColor"/>
-          <rect x="2" y="12.2" width="14" height="1.8" rx="0.9" fill="currentColor"/>
+          <rect x="2" y="4" width="14" height="1.8" rx="0.9" fill="currentColor" />
+          <rect x="2" y="8.1" width="14" height="1.8" rx="0.9" fill="currentColor" />
+          <rect x="2" y="12.2" width="14" height="1.8" rx="0.9" fill="currentColor" />
         </svg>
       </button>
 
       {open && (
         <div className="hamburger-panel">
           <p className="hamburger-body">
-            name NYC subway stops from memory. made by <strong>Meredith</strong>.<br /><br />heavily inspired by{' '}
+            name NYC subway stops from memory. made by <strong>Meredith</strong> and Claude Code.<br /><br />heavily inspired by{' '}
             <a
               href="https://carvin.github.io/sf-street-names/#"
               target="_blank"
@@ -50,6 +64,36 @@ export function HamburgerMenu() {
           >
             ☕ buy me a coffee
           </a>
+
+          <div className="hamburger-settings">
+            <div className="hamburger-settings-divider" />
+            <div className="settings-controls">
+              <div className="style-toggle" role="group" aria-label="Map style">
+                <button
+                  className={`style-toggle-opt${mapStyle === 'streets' ? ' style-toggle-opt--active' : ''}`}
+                  onClick={mapStyle !== 'streets' ? onToggleStyle : undefined}
+                  aria-pressed={mapStyle === 'streets'}
+                >
+                  Dark
+                </button>
+                <button
+                  className={`style-toggle-opt${mapStyle === 'schematic' ? ' style-toggle-opt--active' : ''}`}
+                  onClick={mapStyle !== 'schematic' ? onToggleStyle : undefined}
+                  aria-pressed={mapStyle === 'schematic'}
+                >
+                  Light
+                </button>
+              </div>
+              <button className="settings-reset-btn" onClick={handleReset} aria-label="Reset progress">
+                Reset
+              </button>
+            </div>
+            <p className="map-attribution">
+              © <a href="https://openfreemap.org" target="_blank" rel="noopener noreferrer">OpenFreeMap</a>
+              {' · '}
+              © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>
+            </p>
+          </div>
         </div>
       )}
     </div>
