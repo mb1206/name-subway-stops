@@ -16,6 +16,10 @@ export const BOROUGH_SHORT: Record<Borough, string> = {
 // longitude threshold but are in Manhattan borough.
 const MANHATTAN_UPPER_IDS = new Set(['A03', '109', 'A02', '108', '107'])
 
+// Grant Av (A57) is in Brooklyn despite sitting east of the J-train Queens stops
+// at the same latitude — no longitude threshold cleanly separates them.
+const BROOKLYN_IDS = new Set(['A57'])
+
 export function getBoroughForStop(stop: Stop): Borough {
   const [lng, lat] = stop.coordinates
 
@@ -32,9 +36,12 @@ export function getBoroughForStop(stop: Stop): Borough {
   // which are at lng -73.944 to -73.956 (Manhattan, west of the river)
   if (lat > 40.758 && lat < 40.800 && lng > -73.937) return 'Queens'
   // Southern Queens: Ozone Park / J line east of Brooklyn border
-  if (lat < 40.695 && lng > -73.870) return 'Queens'
+  // Grant Av (A57) is excluded — it sits east of J-train Queens stops but is in Brooklyn
+  if (lat < 40.695 && lng > -73.870 && !BROOKLYN_IDS.has(stop.id)) return 'Queens'
   // Mid-Queens: E/F/M/R and M-line stops (Woodhaven Blvd, Grand Av-Newtown, Middle Village, etc.)
-  if (lat > 40.695 && lat < 40.742 && lng > -73.905) return 'Queens'
+  // lat > 40.697 (not 40.695) excludes Halsey St L (lat=40.6956, Brooklyn)
+  // lng > -73.909 (not -73.905) includes Seneca Av (lng=-73.908, Queens)
+  if (lat > 40.697 && lat < 40.742 && lng > -73.909) return 'Queens'
 
   // Brooklyn (Queens rules above must fire first to avoid overlap in lat 40.738-40.755)
   if (lat < 40.695) return 'Brooklyn'                          // south Brooklyn

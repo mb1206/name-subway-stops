@@ -46,7 +46,7 @@ export function GuessedList({ stops, allStops, guessedCount, totalCount, milesUn
         </div>
         <div className="sidebar-miles">
           <span className="sidebar-miles-val">{milesUnlocked.toFixed(1)}</span>
-          <span className="sidebar-miles-label"> / {totalMiles} mi of track</span>
+          <span className="sidebar-miles-label">{' / '}{totalMiles} mi of track</span>
         </div>
       </div>
 
