@@ -22,7 +22,7 @@ export function getBoroughForStop(stop: Stop): Borough {
   if (stop.lines.includes('SIR')) return 'Staten Island'
 
   // Bronx: north of Harlem River, east of upper Manhattan corridor
-  if (lat > 40.803 && lng > -73.929 && !MANHATTAN_UPPER_IDS.has(stop.id)) return 'Bronx'
+  if (lat > 40.803 && lng > -73.930 && !MANHATTAN_UPPER_IDS.has(stop.id)) return 'Bronx'
 
   // Queens: eastern Queens (Rockaways, Jamaica, Flushing)
   if (lng > -73.865) return 'Queens'
@@ -33,6 +33,8 @@ export function getBoroughForStop(stop: Stop): Borough {
   if (lat > 40.758 && lat < 40.800 && lng > -73.937) return 'Queens'
   // Southern Queens: Ozone Park / J line east of Brooklyn border
   if (lat < 40.695 && lng > -73.870) return 'Queens'
+  // Mid-Queens: E/F/M/R and M-line stops (Woodhaven Blvd, Grand Av-Newtown, Middle Village, etc.)
+  if (lat > 40.695 && lat < 40.742 && lng > -73.905) return 'Queens'
 
   // Brooklyn (Queens rules above must fire first to avoid overlap in lat 40.738-40.755)
   if (lat < 40.695) return 'Brooklyn'                          // south Brooklyn
