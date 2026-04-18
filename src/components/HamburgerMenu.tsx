@@ -32,7 +32,7 @@ export function HamburgerMenu() {
       {open && (
         <div className="hamburger-panel">
           <p className="hamburger-body">
-            name NYC subway stops from memory. made by <strong>Meredith</strong>. heavily inspired by{' '}
+            name NYC subway stops from memory. made by <strong>Meredith</strong>.<br /><br />heavily inspired by{' '}
             <a
               href="https://carvin.github.io/sf-street-names/#"
               target="_blank"
