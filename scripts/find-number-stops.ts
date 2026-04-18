@@ -1,4 +1,4 @@
-import { findMatch } from '../src/lib/matching'
+import { findAllMatches } from '../src/lib/matching'
 import stopsData from '../src/data/stops.json'
 import type { Stop } from '../src/types'
 
@@ -6,9 +6,11 @@ const stops = stopsData as Stop[]
 const guessed = new Set<string>()
 const results: { input: string; stop: Stop }[] = []
 
+// Use findAllMatches so every stop that could match a number is captured,
+// including multiple platforms at the same named station.
 for (let i = 1; i <= 250; i++) {
-  const match = findMatch(String(i), stops, guessed)
-  if (match) {
+  const matches = findAllMatches(String(i), stops, guessed)
+  for (const match of matches) {
     results.push({ input: String(i), stop: match })
     guessed.add(match.id)
   }
