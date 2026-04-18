@@ -93,11 +93,28 @@
   background: rgba(255, 213, 79, 0.2);
 }
 
+.hamburger-settings {
+  display: none;
+}
+
+.hamburger-settings-divider {
+  height: 1px;
+  background: var(--ui-border);
+  margin: 12px 0;
+}
+
 /* On mobile, tuck into the header's left edge */
 @media (max-width: 767px) {
+  .hamburger-settings {
+    display: block;
+  }
+
+  .hamburger-settings .map-attribution {
+    margin-top: 8px;
+  }
   .hamburger-root {
-    top: 10px;
-    left: 8px;
+    top: 24px;
+    left: 16px;
   }
 
   .hamburger-btn {

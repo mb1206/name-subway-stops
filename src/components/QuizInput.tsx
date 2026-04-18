@@ -11,22 +11,26 @@ interface Props {
 export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
-  const alreadyGuessed = value.trim() !== '' ? (checkAlreadyGuessed?.(value) ?? []) : []
+  const justSubmittedRef = useRef(false)
+  const alreadyGuessed = !justSubmittedRef.current && value.trim() !== '' ? (checkAlreadyGuessed?.(value) ?? []) : []
 
   useEffect(() => {
     inputRef.current?.focus()
   }, [])
 
   useEffect(() => {
+    justSubmittedRef.current = false
     setValue('')
   }, [resetKey])
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    justSubmittedRef.current = false
     setValue(e.target.value)
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
+      justSubmittedRef.current = true
       onInput(value)
     }
   }

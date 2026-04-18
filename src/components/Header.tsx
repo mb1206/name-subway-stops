@@ -3,7 +3,7 @@ import { BOROUGH_SHORT } from '../lib/borough'
 import type { BoroughStat } from '../lib/borough'
 import './Header.css'
 
-const SEGMENTS = 40
+const SEGMENTS = 20
 
 interface Props {
   guessedCount: number

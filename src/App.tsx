@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { useQuiz } from './hooks/useQuiz'
 import { Header } from './components/Header'
 import { QuizInput } from './components/QuizInput'
@@ -33,6 +33,22 @@ export default function App() {
     setMapStyle(prev => prev === 'streets' ? 'schematic' : 'streets')
   }, [])
 
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+    function update() {
+      const offset = Math.max(0, window.innerHeight - vv!.height - vv!.offsetTop)
+      document.documentElement.style.setProperty('--keyboard-offset', `${offset}px`)
+    }
+    vv.addEventListener('resize', update)
+    vv.addEventListener('scroll', update)
+    update()
+    return () => {
+      vv.removeEventListener('resize', update)
+      vv.removeEventListener('scroll', update)
+    }
+  }, [])
+
   return (
     <div className="app" data-theme={mapStyle === 'schematic' ? 'light' : 'dark'}>
       <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} />
@@ -41,7 +57,7 @@ export default function App() {
       <ToastStack toasts={toasts} />
       <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onStopHover={setHoveredStopId} onShare={() => setShowShare(true)} />
       {showShare && <ShareModal guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onClose={() => setShowShare(false)} />}
-      <HamburgerMenu />
+      <HamburgerMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} />
       <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} />
     </div>
   )
