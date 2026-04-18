@@ -48,7 +48,7 @@ export function HamburgerMenu() {
             rel="noopener noreferrer"
             className="hamburger-coffee"
           >
-            ☕ Buy me a coffee
+            ☕ buy me a coffee
           </a>
         </div>
       )}
