@@ -6,6 +6,7 @@ export function normalize(s: string): string {
     .toLowerCase()
     .replace(/[-/]/g, ' ')
     .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\b(e|w)\b/g, m => m === 'e' ? 'east' : 'west')
     .replace(/\bhts\b/g, 'heights')
     .replace(/\b(\d+)(st|nd|rd|th)\b/g, '$1')
     .replace(/\s+(av|ave|avs|sts|st|blvd|boulevard|rd|ln|dr|ct|pl|pkwy|pkway|parkway|tpke|turnpike)\s*$/g, '')

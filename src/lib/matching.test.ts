@@ -20,7 +20,7 @@ describe('normalize', () => {
   })
 
   it('strips hyphens and slashes', () => {
-    expect(normalize('A/C/E')).toBe('a c e')
+    expect(normalize('A/C/E')).toBe('a c east')
     expect(normalize('Smith-9 Sts')).toBe('smith 9')
   })
 
