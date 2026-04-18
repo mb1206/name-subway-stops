@@ -55,33 +55,6 @@
   border: 1px solid rgba(45, 138, 138, 0.25);
 }
 
-.quiz-input--filling {
-  color: transparent;
-  cursor: default;
-}
-
-.quiz-input--filling::placeholder {
-  color: var(--ui-text-dim);
-}
-
-.quiz-input-container:has(.quiz-input--filling)::after {
-  content: '';
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--ui-border-input);
-  border-top-color: var(--ui-text-secondary);
-  border-radius: 50%;
-  animation: quiz-spin 0.7s linear infinite;
-}
-
-@keyframes quiz-spin {
-  to { transform: translateY(-50%) rotate(360deg); }
-}
-
 .quiz-input-hint-names {
   color: rgba(45, 138, 138, 1);
   font-style: normal;
