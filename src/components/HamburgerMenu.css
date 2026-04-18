@@ -96,7 +96,7 @@
 /* On mobile, tuck into the header's left edge */
 @media (max-width: 767px) {
   .hamburger-root {
-    top: 12px;
+    top: 4px;
     left: 8px;
   }
 
