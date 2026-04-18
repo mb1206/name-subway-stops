@@ -42,7 +42,8 @@
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  white-space: nowrap;
+  width: 100%;
+  white-space: normal;
   font-size: 11px;
   color: rgba(45, 138, 138, 0.8);
   pointer-events: none;
