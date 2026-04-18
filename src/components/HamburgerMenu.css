@@ -1,0 +1,115 @@
+.hamburger-root {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 30;
+}
+
+.hamburger-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ui-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--ui-border-input);
+  border-radius: 8px;
+  color: var(--ui-text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.hamburger-btn:hover,
+.hamburger-btn--open {
+  color: var(--ui-text);
+  background: var(--ui-bg-solid);
+}
+
+.hamburger-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 240px;
+  background: var(--ui-bg-solid);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  animation: hamburger-pop 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes hamburger-pop {
+  from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+.hamburger-heading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ui-text-dim);
+  margin: 0 0 10px;
+}
+
+.hamburger-body {
+  font-size: 13px;
+  color: var(--ui-text-secondary);
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+
+.hamburger-body strong {
+  color: var(--ui-text);
+  font-weight: 600;
+}
+
+.hamburger-link {
+  color: #5ba4cf;
+  text-decoration: none;
+}
+
+.hamburger-link:hover {
+  text-decoration: underline;
+}
+
+.hamburger-coffee {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 7px 12px;
+  background: rgba(255, 213, 79, 0.12);
+  border: 1px solid rgba(255, 213, 79, 0.25);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f6c90e;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.hamburger-coffee:hover {
+  background: rgba(255, 213, 79, 0.2);
+}
+
+/* On mobile, tuck into the header's left edge */
+@media (max-width: 767px) {
+  .hamburger-root {
+    top: 8px;
+    left: 8px;
+  }
+
+  .hamburger-btn {
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .hamburger-btn:hover,
+  .hamburger-btn--open {
+    background: var(--ui-hover);
+    border-color: transparent;
+  }
+}

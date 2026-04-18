@@ -7,6 +7,7 @@ import { QuizMap } from './components/Map'
 import { GuessedList } from './components/GuessedList'
 import { SettingsMenu } from './components/SettingsMenu'
 import { ShareModal } from './components/ShareModal'
+import { HamburgerMenu } from './components/HamburgerMenu'
 import stopsData from './data/stops.json'
 import { computeMilesUnlocked, TOTAL_TRACK_MILES } from './lib/mileage'
 import { computeBoroughStats } from './lib/borough'
@@ -41,6 +42,7 @@ export default function App() {
       <ToastStack toasts={toasts} />
       <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onStopHover={setHoveredStopId} onShare={() => setShowShare(true)} />
       {showShare && <ShareModal guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onClose={() => setShowShare(false)} />}
+      <HamburgerMenu />
       <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} showBoroughDebug={showBoroughDebug} onToggleBoroughDebug={() => setShowBoroughDebug(v => !v)} />
     </div>
   )
