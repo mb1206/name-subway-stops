@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { X } from 'lucide-react'
 import type { Stop } from '../types'
 import './QuizInput.css'
 
@@ -35,6 +36,18 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     }
   }
 
+  function handleClear() {
+    justSubmittedRef.current = false
+    setValue('')
+    inputRef.current?.focus()
+  }
+
+  function handleFocus() {
+    // iOS Safari scrolls the body when an input is focused even if it's fixed;
+    // restore scroll to top after the browser's automatic scroll settles.
+    setTimeout(() => window.scrollTo(0, 0), 50)
+  }
+
   const hintNames = alreadyGuessed.map(s => s.name).join(', ')
 
   return (
@@ -46,6 +59,7 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
         placeholder="Type a station and press Enter..."
         autoComplete="off"
         autoCorrect="off"
@@ -53,6 +67,11 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         spellCheck={false}
         autoFocus
       />
+      {value && (
+        <button className="quiz-input-clear" onClick={handleClear} tabIndex={-1} aria-label="Clear input">
+          <X size={14} />
+        </button>
+      )}
       {alreadyGuessed.length > 0 && (
         <span className="quiz-input-hint">
           already named: <span className="quiz-input-hint-names">{hintNames}</span>

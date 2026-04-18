@@ -9,7 +9,7 @@
 
 .quiz-input {
   width: 100%;
-  padding: 16px 20px;
+  padding: 16px 44px 16px 20px;
   font-size: 18px;
   background: var(--ui-bg);
   backdrop-filter: blur(8px);
@@ -35,6 +35,27 @@
 
 .quiz-input--already:focus {
   border-color: rgba(45, 138, 138, 0.7);
+}
+
+.quiz-input-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ui-placeholder);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 4px;
+  line-height: 0;
+}
+
+.quiz-input-clear:hover {
+  color: var(--ui-text);
 }
 
 /* Hint appears below the input on desktop (input is near top) */
