@@ -21,7 +21,7 @@
   .header-bar {
     display: flex;
     align-items: center;
-    padding: 10px 16px 6px 52px; /* left room for the floating hamburger button */
+    padding: 16px 16px 6px 52px; /* left room for the floating hamburger button */
     gap: 8px;
   }
 

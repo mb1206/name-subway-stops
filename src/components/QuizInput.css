@@ -73,6 +73,6 @@
 
   /* Push input down when borough detail panel is expanded */
   .app:has(.header-detail) .quiz-input-container {
-    top: 220px;
+    top: 226px;
   }
 }
