@@ -87,24 +87,6 @@ export const STREETS_STYLE: StyleSpecification = {
       paint: { 'line-color': '#2d8a8a', 'line-width': 2.5 },
     },
     {
-      id: 'road-labels',
-      type: 'symbol',
-      source: 'openmaptiles',
-      'source-layer': 'transportation_name',
-      layout: {
-        'text-field': ['get', 'name'],
-        'text-font': ['Noto Sans Regular'],
-        'text-size': 10,
-        'symbol-placement': 'line',
-        'text-max-angle': 30,
-      },
-      paint: {
-        'text-color': '#4a6080',
-        'text-halo-color': '#1a1b2e',
-        'text-halo-width': 1.5,
-      },
-    },
-    {
       id: 'place-suburb',
       type: 'symbol',
       source: 'openmaptiles',
