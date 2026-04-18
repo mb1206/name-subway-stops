@@ -115,6 +115,24 @@
   flex-shrink: 0;
 }
 
+.sidebar-miles {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  padding-top: 8px;
+  font-size: 11px;
+}
+
+.sidebar-miles-val {
+  font-weight: 700;
+  color: var(--ui-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar-miles-label {
+  color: var(--ui-text-dim);
+}
+
 /* ── Stop list ─────────────────────────────────── */
 
 .sidebar-body {

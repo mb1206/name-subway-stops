@@ -10,10 +10,12 @@ interface Props {
   allStops: Stop[]
   guessedCount: number
   totalCount: number
+  milesUnlocked: number
+  totalMiles: number
   onStopHover: (id: string | null) => void
 }
 
-export function GuessedList({ stops, allStops, guessedCount, totalCount, onStopHover }: Props) {
+export function GuessedList({ stops, allStops, guessedCount, totalCount, milesUnlocked, totalMiles, onStopHover }: Props) {
   const pct = totalCount > 0 ? Math.round(guessedCount / totalCount * 100) : 0
   const filled = totalCount > 0 ? Math.round(guessedCount / totalCount * SEGMENTS) : 0
   const boroughStats = computeBoroughStats(stops, allStops)
@@ -41,6 +43,10 @@ export function GuessedList({ stops, allStops, guessedCount, totalCount, onStopH
               <span className="sidebar-borough-pct">{bPct}%</span>
             </div>
           ))}
+        </div>
+        <div className="sidebar-miles">
+          <span className="sidebar-miles-val">{milesUnlocked.toFixed(1)}</span>
+          <span className="sidebar-miles-label"> / {totalMiles} mi of track</span>
         </div>
       </div>
 
