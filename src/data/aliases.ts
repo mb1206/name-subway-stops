@@ -14,7 +14,7 @@ export const ALIASES: Record<string, string[]> = {
   'Whitehall St-South Ferry':            ['Whitehall St', 'South Ferry', 'Whitehall'],
   'Chambers St':                         ['Chambers Street'],
   'Cortlandt St':                        ['Cortlandt Street', 'WTC Cortlandt'],
-  'World Trade Center':                  ['WTC', 'World Trade Ctr'],
+  'World Trade Center':                  ['WTC', 'World Trade Ctr', 'World Trade'],
   'Delancey St-Essex St':                ['Delancey St', 'Essex St', 'Delancey Essex'],
   'Broadway-Lafayette St':               ['Broadway Lafayette', 'Lafayette St'],
   'Myrtle-Willoughby Avs':               ['Myrtle Willoughby'],

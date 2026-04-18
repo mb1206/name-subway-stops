@@ -149,6 +149,12 @@ describe('findAllMatches', () => {
     expect(findAllMatches('e broadway', [stop], new Set())).toHaveLength(1)
   })
 
+  it('matches "world trade" and "wtc" to World Trade Center', () => {
+    const stop = makeStop('World Trade Center', [], ['E'] as Stop['lines'])
+    expect(findAllMatches('world trade', [stop], new Set())).toHaveLength(1)
+    expect(findAllMatches('wtc', [stop], new Set())).toHaveLength(1)
+  })
+
   it('matches compound stop alongside standalone when both share a segment', () => {
     const compound = makeStop('90 St-Elmhurst Av', [])
     const standalone = makeStop('Elmhurst Av', [])
