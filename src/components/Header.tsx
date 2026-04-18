@@ -28,7 +28,7 @@ export function Header({ guessedCount, totalCount, milesUnlocked, totalMiles, bo
           <span className="header-count-sep"> / {totalCount}</span>
           <span className="header-count-pct">{pct}%</span>
         </div>
-        <button className="header-share-btn" onPointerDown={e => e.preventDefault()} onClick={onShare} aria-label="Share progress">
+        <button className="header-share-btn" onClick={onShare} aria-label="Share progress">
           <Share2 size={16} aria-hidden="true" />
         </button>
         <button
