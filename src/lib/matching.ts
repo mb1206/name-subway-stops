@@ -6,10 +6,10 @@ export function normalize(s: string): string {
     .toLowerCase()
     .replace(/[-/]/g, ' ')
     .replace(/[^a-z0-9\s]/g, '')
-    .replace(/\b(e|w)\b/g, m => m === 'e' ? 'east' : 'west')
+    .replace(/\b(e|w|mt)\b/g, m => ({ e: 'east', w: 'west', mt: 'mount' }[m]!))
     .replace(/\bhts\b/g, 'heights')
     .replace(/\b(\d+)(st|nd|rd|th)\b/g, '$1')
-    .replace(/\s+(av|ave|avs|sts|st|blvd|boulevard|rd|ln|dr|ct|pl|pkwy|pkway|parkway|tpke|turnpike)\s*$/g, '')
+    .replace(/\s+(avenue|av|ave|avs|sts|street|st|blvd|boulevard|rd|ln|dr|ct|pl|pkwy|pkway|parkway|tpke|turnpike)\s*$/g, '')
     .replace(/\s+/g, ' ')
     .trim()
 }

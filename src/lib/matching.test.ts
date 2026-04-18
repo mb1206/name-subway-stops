@@ -41,6 +41,16 @@ describe('normalize', () => {
     expect(normalize('W 4 St')).toBe('west 4')
   })
 
+  it('expands Mt abbreviation to mount', () => {
+    expect(normalize('Mt Eden Av')).toBe('mount eden')
+    expect(normalize('mount eden avenue')).toBe('mount eden')
+  })
+
+  it('strips avenue and street as suffix', () => {
+    expect(normalize('Utica Avenue')).toBe('utica')
+    expect(normalize('Canal Street')).toBe('canal')
+  })
+
   it('strips trailing street type suffixes', () => {
     expect(normalize('Utica Av')).toBe('utica')
     expect(normalize('Kingston-Throop Avs')).toBe('kingston throop')
