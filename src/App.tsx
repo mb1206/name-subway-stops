@@ -37,8 +37,10 @@ export default function App() {
     const vv = window.visualViewport
     if (!vv) return
     function update() {
-      const offset = Math.max(0, window.innerHeight - vv!.height - vv!.offsetTop)
+      const offsetTop = vv!.offsetTop
+      const offset = Math.max(0, window.innerHeight - vv!.height - offsetTop)
       document.documentElement.style.setProperty('--keyboard-offset', `${offset}px`)
+      document.documentElement.style.setProperty('--vv-offset-top', `${offsetTop}px`)
     }
     vv.addEventListener('resize', update)
     vv.addEventListener('scroll', update)

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { X } from 'lucide-react'
 import type { Stop } from '../types'
 import './QuizInput.css'
 
@@ -35,6 +36,12 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     }
   }
 
+  function handleClear() {
+    justSubmittedRef.current = false
+    setValue('')
+    inputRef.current?.focus()
+  }
+
   const hintNames = alreadyGuessed.map(s => s.name).join(', ')
 
   return (
@@ -53,6 +60,11 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         spellCheck={false}
         autoFocus
       />
+      {value && (
+        <button className="quiz-input-clear" onClick={handleClear} tabIndex={-1} aria-label="Clear input">
+          <X size={14} />
+        </button>
+      )}
       {alreadyGuessed.length > 0 && (
         <span className="quiz-input-hint">
           already named: <span className="quiz-input-hint-names">{hintNames}</span>

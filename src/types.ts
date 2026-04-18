@@ -20,7 +20,8 @@ export interface Stop {
 
 export interface Toast {
   id: string
-  stop: Stop
+  stop?: Stop
+  message?: string
   fading?: boolean
 }
 
