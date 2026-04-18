@@ -159,6 +159,16 @@ describe('findAllMatches', () => {
     expect(findAllMatches('e broadway', [stop], new Set())).toHaveLength(1)
   })
 
+  it('matches slash-separated stop names by full name and by each segment', () => {
+    const stop = makeStop('5 Av/53 St', [], ['E', 'M'] as Stop['lines'])
+    // full name with slash (slash becomes space in normalize)
+    expect(findAllMatches('5 av/53rd', [stop], new Set())).toHaveLength(1)
+    // just the street number segment
+    expect(findAllMatches('53rd', [stop], new Set())).toHaveLength(1)
+    // just the avenue segment
+    expect(findAllMatches('5 av', [stop], new Set())).toHaveLength(1)
+  })
+
   it('matches "world trade" and "wtc" to World Trade Center', () => {
     const stop = makeStop('World Trade Center', [], ['E'] as Stop['lines'])
     expect(findAllMatches('world trade', [stop], new Set())).toHaveLength(1)

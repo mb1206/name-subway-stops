@@ -24,8 +24,8 @@ function getAliases(stop: Stop): string[] {
 function stopMatchesNormalized(stop: Stop, normalized: string): boolean {
   // Match full name or any alias
   if ([stop.name, ...getAliases(stop)].some(name => normalize(name) === normalized)) return true
-  // Match any hyphen-split segment individually
-  const segments = stop.name.split('-')
+  // Match any hyphen- or slash-split segment individually
+  const segments = stop.name.split(/[-/]/)
   if (segments.length > 1) {
     return segments.some(seg => normalize(seg.trim()) === normalized)
   }
