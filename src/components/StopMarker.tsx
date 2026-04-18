@@ -1,5 +1,5 @@
 import { Marker } from 'react-map-gl/maplibre'
-import { LINE_COLORS } from '../data/lines'
+import { LINE_COLORS, lineTextColor } from '../data/lines'
 import type { Stop } from '../types'
 import './StopMarker.css'
 
@@ -22,8 +22,10 @@ export function StopMarker({ stop, named, highlighted }: Props) {
                   key={line}
                   className="stop-dot-named"
                   data-testid="stop-line-dot"
-                  style={{ background: LINE_COLORS[line] }}
-                />
+                  style={{ background: LINE_COLORS[line], color: lineTextColor(line) }}
+                >
+                  {line}
+                </span>
               ))}
             </div>
           </div>
