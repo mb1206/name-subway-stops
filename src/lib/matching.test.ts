@@ -35,6 +35,12 @@ describe('normalize', () => {
     expect(normalize('Jackson Hts')).toBe('jackson heights')
   })
 
+  it('expands single-letter directional prefixes', () => {
+    expect(normalize('E Broadway')).toBe('east broadway')
+    expect(normalize('e broadway')).toBe('east broadway')
+    expect(normalize('W 4 St')).toBe('west 4')
+  })
+
   it('strips trailing street type suffixes', () => {
     expect(normalize('Utica Av')).toBe('utica')
     expect(normalize('Kingston-Throop Avs')).toBe('kingston throop')
@@ -136,6 +142,11 @@ describe('findAllMatches', () => {
     const stop = makeStop('President St-Medgar Evers College', [])
     expect(findAllMatches('president', [stop], new Set())).toHaveLength(1)
     expect(findAllMatches('medgar evers college', [stop], new Set())).toHaveLength(1)
+  })
+
+  it('matches "e broadway" to stop named "East Broadway"', () => {
+    const stop = makeStop('East Broadway', [])
+    expect(findAllMatches('e broadway', [stop], new Set())).toHaveLength(1)
   })
 
   it('matches compound stop alongside standalone when both share a segment', () => {
