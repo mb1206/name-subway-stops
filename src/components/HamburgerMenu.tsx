@@ -33,6 +33,7 @@ export function HamburgerMenu({ mapStyle, onToggleStyle, onReset }: Props) {
     <div className="hamburger-root" ref={ref}>
       <button
         className={`hamburger-btn${open ? ' hamburger-btn--open' : ''}`}
+        onPointerDown={e => e.preventDefault()}
         onClick={() => setOpen(v => !v)}
         aria-label={open ? 'Close menu' : 'Open menu'}
         aria-expanded={open}
@@ -43,7 +44,7 @@ export function HamburgerMenu({ mapStyle, onToggleStyle, onReset }: Props) {
       {open && (
         <div className="hamburger-panel">
           <p className="hamburger-body">
-            name NYC subway stops from memory. made by <strong>Meredith</strong> and Claude Code.<br /><br />heavily inspired by{' '}
+            name NYC subway stops from memory. made by <strong>Meredith</strong>.<br /><br />heavily inspired by{' '}
             <a
               href="https://carvin.github.io/sf-street-names/#"
               target="_blank"
