@@ -12,7 +12,8 @@
 
 @media (max-width: 767px) {
   .toast-stack {
-    top: 160px; /* below mobile header + input (~94px top + ~52px height + 14px gap) */
+    top: auto;
+    bottom: 32px;
     left: 50%;
     transform: translateX(-50%);
     align-items: center;
