@@ -115,6 +115,29 @@
   flex-shrink: 0;
 }
 
+.sidebar-share-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  width: 100%;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  color: var(--ui-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  justify-content: center;
+}
+
+.sidebar-share-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--ui-text);
+}
+
 .sidebar-miles {
   display: flex;
   align-items: baseline;

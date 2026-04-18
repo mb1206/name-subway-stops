@@ -11,9 +11,10 @@ interface Props {
   milesUnlocked: number
   totalMiles: number
   boroughStats: BoroughStat[]
+  onShare: () => void
 }
 
-export function Header({ guessedCount, totalCount, milesUnlocked, totalMiles, boroughStats }: Props) {
+export function Header({ guessedCount, totalCount, milesUnlocked, totalMiles, boroughStats, onShare }: Props) {
   const [expanded, setExpanded] = useState(false)
   const pct = totalCount > 0 ? Math.round(guessedCount / totalCount * 100) : 0
   const filled = totalCount > 0 ? Math.round(guessedCount / totalCount * SEGMENTS) : 0
@@ -26,6 +27,14 @@ export function Header({ guessedCount, totalCount, milesUnlocked, totalMiles, bo
           <span className="header-count-sep"> / {totalCount}</span>
           <span className="header-count-pct">{pct}%</span>
         </div>
+        <button className="header-share-btn" onClick={onShare} aria-label="Share progress">
+          <svg width="16" height="16" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+            <circle cx="10.5" cy="2.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
+            <circle cx="10.5" cy="10.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
+            <circle cx="2.5" cy="6.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
+            <path d="M4 5.8l5-2.8M4 7.2l5 2.8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+          </svg>
+        </button>
         <button
           className={`header-toggle${expanded ? ' header-toggle--open' : ''}`}
           onClick={() => setExpanded(v => !v)}

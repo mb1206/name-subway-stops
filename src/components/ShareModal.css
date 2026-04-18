@@ -1,0 +1,202 @@
+.share-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: share-fade-in 0.15s ease;
+}
+
+@keyframes share-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.share-card {
+  position: relative;
+  background: #0f1428;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 32px 28px 24px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  animation: share-pop-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes share-pop-in {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.share-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.share-close:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.share-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.share-emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.share-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+/* Count + progress bar */
+.share-count-block {
+  margin-bottom: 20px;
+}
+
+.share-count {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin-bottom: 8px;
+}
+
+.share-count-num {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.share-count-sep {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.4);
+  font-variant-numeric: tabular-nums;
+}
+
+.share-count-pct {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.share-progress {
+  display: flex;
+  gap: 2px;
+}
+
+.share-seg {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.share-seg--filled {
+  background: #f6c90e;
+}
+
+/* Borough bars */
+.share-boroughs {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.share-borough-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-borough-name {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.share-borough-bar {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.share-borough-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: #f6c90e;
+}
+
+.share-borough-pct {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Miles */
+.share-miles {
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.share-miles-val {
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.share-miles-label {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Footer URL */
+.share-footer {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: center;
+}
+
+.share-url {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: monospace;
+  letter-spacing: 0.02em;
+}

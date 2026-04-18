@@ -9,6 +9,7 @@ const defaultProps = {
   milesUnlocked: 0,
   totalMiles: 298,
   boroughStats: [],
+  onShare: () => {},
 }
 
 describe('Header', () => {
@@ -38,9 +39,9 @@ describe('Header', () => {
   it('collapses again when toggle is clicked a second time', async () => {
     const user = userEvent.setup()
     render(<Header {...defaultProps} boroughStats={[{ borough: 'Manhattan', guessed: 10, total: 100, pct: 10 }]} />)
-    const btn = screen.getByRole('button')
+    const btn = screen.getByRole('button', { name: /show progress/i })
     await user.click(btn)
-    await user.click(btn)
+    await user.click(screen.getByRole('button', { name: /hide progress/i }))
     expect(screen.queryByText('Manhattan')).not.toBeInTheDocument()
   })
 })
