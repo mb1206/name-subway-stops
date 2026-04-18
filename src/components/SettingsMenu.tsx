@@ -16,23 +16,24 @@ export function SettingsMenu({ mapStyle, onToggleStyle, onReset }: Props) {
 
   return (
     <div className="settings-wrap">
-      <div className="style-toggle" role="group" aria-label="Map style">
-        <button
-          className={`style-toggle-opt${mapStyle === 'streets' ? ' style-toggle-opt--active' : ''}`}
-          onClick={mapStyle !== 'streets' ? onToggleStyle : undefined}
-          aria-pressed={mapStyle === 'streets'}
-        >
-          Dark
-        </button>
-        <button
-          className={`style-toggle-opt${mapStyle === 'schematic' ? ' style-toggle-opt--active' : ''}`}
-          onClick={mapStyle !== 'schematic' ? onToggleStyle : undefined}
-          aria-pressed={mapStyle === 'schematic'}
-        >
-          Light
-        </button>
-        <div className="style-toggle-divider" />
-        <button className="style-toggle-opt style-toggle-reset" onClick={handleReset} aria-label="Reset progress">
+      <div className="settings-controls">
+        <div className="style-toggle" role="group" aria-label="Map style">
+          <button
+            className={`style-toggle-opt${mapStyle === 'streets' ? ' style-toggle-opt--active' : ''}`}
+            onClick={mapStyle !== 'streets' ? onToggleStyle : undefined}
+            aria-pressed={mapStyle === 'streets'}
+          >
+            Dark
+          </button>
+          <button
+            className={`style-toggle-opt${mapStyle === 'schematic' ? ' style-toggle-opt--active' : ''}`}
+            onClick={mapStyle !== 'schematic' ? onToggleStyle : undefined}
+            aria-pressed={mapStyle === 'schematic'}
+          >
+            Light
+          </button>
+        </div>
+        <button className="settings-reset-btn" onClick={handleReset} aria-label="Reset progress">
           Reset
         </button>
       </div>
