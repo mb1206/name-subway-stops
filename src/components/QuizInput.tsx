@@ -23,7 +23,7 @@ export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
     setValue('')
   }, [resetKey])
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     justSubmittedRef.current = false
     setValue(e.target.value)
   }

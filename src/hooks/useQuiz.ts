@@ -1,6 +1,9 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { findAllMatches } from '../lib/matching'
+import { NUMBER_STOP_IDS } from '../data/number-stop-ids'
 import type { Stop, Toast } from '../types'
+
+const CHEAT_PHRASE = 'beep boop'
 
 const EMPTY_SET = new Set<string>()
 const STORAGE_KEY = 'nyc-subway-quiz-guessed'
@@ -28,6 +31,7 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
   )
   const [toasts, setToasts] = useState<Toast[]>([])
   const timerIds = useRef<Set<ReturnType<typeof setTimeout>>>(new Set())
+  const stopById = useRef(new Map(stops.map(s => [s.id, s])))
 
   useEffect(() => {
     return () => { timerIds.current.forEach(id => clearTimeout(id)) }
@@ -39,6 +43,23 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
   }, [guessedStops])
 
   const onInput = useCallback((input: string) => {
+    if (input.trim().toLowerCase() === CHEAT_PHRASE) {
+      const toAdd = NUMBER_STOP_IDS
+        .map(id => stopById.current.get(id))
+        .filter((s): s is Stop => s !== undefined)
+      setGuessed(prev => {
+        const next = new Set(prev)
+        toAdd.forEach(s => next.add(s.id))
+        return next
+      })
+      setGuessedStops(prev => {
+        const prevIds = new Set(prev.map(s => s.id))
+        return [...prev, ...toAdd.filter(s => !prevIds.has(s.id))]
+      })
+      onMatch?.(toAdd[0])
+      return
+    }
+
     const matches = findAllMatches(input, stops, guessed)
     if (matches.length === 0) return
 
