@@ -19,7 +19,6 @@ export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
 
   useEffect(() => {
     setValue('')
-    inputRef.current?.focus()
   }, [resetKey])
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
