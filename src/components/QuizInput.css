@@ -1,10 +1,10 @@
 .quiz-input-container {
   position: fixed;
   top: 24px;
-  right: calc(var(--sidebar-width) + 16px);
+  right: calc(var(--sidebar-width) + 24px);
   left: auto;
   z-index: 10;
-  width: min(380px, calc(100vw - var(--sidebar-width) - 56px));
+  width: min(380px, calc(100vw - var(--sidebar-width) - 64px));
 }
 
 .quiz-input {

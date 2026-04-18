@@ -113,8 +113,9 @@
     margin-top: 8px;
   }
   .hamburger-root {
-    top: 24px;
+    top: calc(24px + var(--vv-offset-top, 0px));
     left: 16px;
+    transition: top 0.15s ease;
   }
 
   .hamburger-btn {
