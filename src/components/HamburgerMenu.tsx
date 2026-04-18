@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { Menu } from 'lucide-react'
 import type { MapStyleId } from '../types'
 import './HamburgerMenu.css'
 
@@ -36,11 +37,7 @@ export function HamburgerMenu({ mapStyle, onToggleStyle, onReset }: Props) {
         aria-label={open ? 'Close menu' : 'Open menu'}
         aria-expanded={open}
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-          <rect x="2" y="4" width="14" height="1.8" rx="0.9" fill="currentColor" />
-          <rect x="2" y="8.1" width="14" height="1.8" rx="0.9" fill="currentColor" />
-          <rect x="2" y="12.2" width="14" height="1.8" rx="0.9" fill="currentColor" />
-        </svg>
+        <Menu size={18} aria-hidden="true" />
       </button>
 
       {open && (

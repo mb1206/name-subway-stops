@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { X, Copy, Check } from 'lucide-react'
 import { BOROUGH_SHORT } from '../lib/borough'
 import type { BoroughStat } from '../lib/borough'
 import './ShareModal.css'
@@ -33,9 +34,7 @@ export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles
     <div className="share-backdrop" onClick={onClose}>
       <div className="share-card" onClick={e => e.stopPropagation()}>
         <button className="share-close" onClick={onClose} aria-label="Close">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
+          <X size={14} aria-hidden="true" />
         </button>
 
         <div className="share-heading">
@@ -76,16 +75,7 @@ export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles
         <div className="share-footer">
           <span className="share-url">{APP_URL}</span>
           <button className="share-copy-btn" onClick={handleCopy} aria-label="Copy link">
-            {copied ? (
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-                <path d="M2 7l3 3 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            ) : (
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-                <rect x="4.5" y="1" width="7.5" height="8.5" rx="1.5" stroke="currentColor" strokeWidth="1.4"/>
-                <path d="M1 4.5h2M1 4.5v7h7v-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-              </svg>
-            )}
+            {copied ? <Check size={13} aria-hidden="true" /> : <Copy size={13} aria-hidden="true" />}
           </button>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { Share2 } from 'lucide-react'
 import { LINE_COLORS, lineTextColor } from '../data/lines'
 import { BOROUGH_SHORT } from '../lib/borough'
 import type { BoroughStat } from '../lib/borough'
@@ -50,12 +51,7 @@ export function GuessedList({ stops, guessedCount, totalCount, milesUnlocked, to
           <span className="sidebar-miles-label">{' / '}{totalMiles} mi of track</span>
         </div>
         <button className="sidebar-share-btn" onClick={onShare} aria-label="Share progress">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-            <circle cx="10.5" cy="2.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
-            <circle cx="10.5" cy="10.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
-            <circle cx="2.5" cy="6.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
-            <path d="M4 5.8l5-2.8M4 7.2l5 2.8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-          </svg>
+          <Share2 size={13} aria-hidden="true" />
           Share
         </button>
       </div>
