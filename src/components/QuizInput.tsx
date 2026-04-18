@@ -42,9 +42,10 @@ export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        placeholder="Type a stop name and press Enter..."
+        placeholder="Type a station and press Enter..."
         autoComplete="off"
         autoCorrect="off"
+        autoCapitalize="none"
         spellCheck={false}
         autoFocus
       />
