@@ -169,6 +169,15 @@ describe('findAllMatches', () => {
     expect(findAllMatches('5 av', [stop], new Set())).toHaveLength(1)
   })
 
+  it('matches "cathedral pkwy" and "cathedral" to Cathedral Pkwy (110 St) stops', () => {
+    const stop1   = makeStop('Cathedral Pkwy (110 St)', [], ['1'] as Stop['lines'])
+    const stopABC = makeStop('Cathedral Pkwy (110 St)', [], ['A', 'B', 'C'] as Stop['lines'])
+    const all = [stop1, stopABC]
+    expect(findAllMatches('cathedral pkwy', all, new Set())).toHaveLength(2)
+    expect(findAllMatches('cathedral',      all, new Set())).toHaveLength(2)
+    expect(findAllMatches('110 st',         all, new Set())).toHaveLength(2)
+  })
+
   it('matches "world trade" and "wtc" to World Trade Center', () => {
     const stop = makeStop('World Trade Center', [], ['E'] as Stop['lines'])
     expect(findAllMatches('world trade', [stop], new Set())).toHaveLength(1)

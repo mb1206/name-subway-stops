@@ -88,6 +88,7 @@ export const ALIASES: Record<string, string[]> = {
   '96 St':                               ['96th St', '96th Street'],
   '72 St':                               ['72nd St', '72nd Street'],
   '110 St':                              ['110th St', 'Cathedral Pkwy'],
+  'Cathedral Pkwy (110 St)':             ['Cathedral Pkwy', 'Cathedral', '110 St', '110th St'],
   '116 St':                              ['116th St'],
   '135 St':                              ['135th St'],
   '145 St':                              ['145th St'],
