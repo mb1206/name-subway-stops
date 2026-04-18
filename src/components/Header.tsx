@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Share2, ChevronDown } from 'lucide-react'
 import { BOROUGH_SHORT } from '../lib/borough'
 import type { BoroughStat } from '../lib/borough'
 import './Header.css'
@@ -28,12 +29,7 @@ export function Header({ guessedCount, totalCount, milesUnlocked, totalMiles, bo
           <span className="header-count-pct">{pct}%</span>
         </div>
         <button className="header-share-btn" onClick={onShare} aria-label="Share progress">
-          <svg width="16" height="16" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-            <circle cx="10.5" cy="2.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
-            <circle cx="10.5" cy="10.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
-            <circle cx="2.5" cy="6.5" r="1.5" stroke="currentColor" strokeWidth="1.4"/>
-            <path d="M4 5.8l5-2.8M4 7.2l5 2.8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-          </svg>
+          <Share2 size={16} aria-hidden="true" />
         </button>
         <button
           className={`header-toggle${expanded ? ' header-toggle--open' : ''}`}
@@ -41,9 +37,7 @@ export function Header({ guessedCount, totalCount, milesUnlocked, totalMiles, bo
           aria-label={expanded ? 'Hide progress details' : 'Show progress details'}
           aria-expanded={expanded}
         >
-          <svg className="header-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-            <path d="M5 7l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <ChevronDown size={18} className="header-chevron" aria-hidden="true" />
         </button>
       </div>
       <div className="header-dots">
