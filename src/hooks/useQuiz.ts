@@ -56,6 +56,18 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
         const prevIds = new Set(prev.map(s => s.id))
         return [...prev, ...toAdd.filter(s => !prevIds.has(s.id))]
       })
+      const cheatToastId = `cheat-${Date.now()}`
+      setToasts(prev => [...prev, { id: cheatToastId, message: 'unlocked all stops matching numbers 1–250' }])
+      const fadeId = setTimeout(() => {
+        timerIds.current.delete(fadeId)
+        setToasts(prev => prev.map(t => t.id === cheatToastId ? { ...t, fading: true } : t))
+      }, 2500)
+      const removeId = setTimeout(() => {
+        timerIds.current.delete(removeId)
+        setToasts(prev => prev.filter(t => t.id !== cheatToastId))
+      }, 2800)
+      timerIds.current.add(fadeId)
+      timerIds.current.add(removeId)
       onMatch?.(toAdd[0])
       return
     }

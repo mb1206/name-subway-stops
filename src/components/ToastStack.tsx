@@ -13,18 +13,24 @@ export function ToastStack({ toasts }: Props) {
     <div className="toast-stack">
       {toasts.map(toast => (
         <div key={toast.id} className={`toast${toast.fading ? ' toast--fading' : ''}`}>
-          <span className="toast-name">{toast.stop.name}</span>
-          <span className="toast-lines">
-            {toast.stop.lines.map(line => (
-              <span
-                key={line}
-                className="toast-line-dot"
-                data-testid="line-dot"
-                style={{ background: LINE_COLORS[line] }}
-                title={line}
-              />
-            ))}
-          </span>
+          {toast.message ? (
+            <span className="toast-name">{toast.message}</span>
+          ) : (
+            <>
+              <span className="toast-name">{toast.stop!.name}</span>
+              <span className="toast-lines">
+                {toast.stop!.lines.map(line => (
+                  <span
+                    key={line}
+                    className="toast-line-dot"
+                    data-testid="line-dot"
+                    style={{ background: LINE_COLORS[line] }}
+                    title={line}
+                  />
+                ))}
+              </span>
+            </>
+          )}
         </div>
       ))}
     </div>
