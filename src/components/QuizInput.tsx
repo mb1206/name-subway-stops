@@ -6,9 +6,10 @@ interface Props {
   onInput: (value: string) => void
   checkAlreadyGuessed?: (value: string) => Stop[]
   resetKey?: number
+  isFilling?: boolean
 }
 
-export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
+export function QuizInput({ onInput, checkAlreadyGuessed, resetKey, isFilling }: Props) {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const justSubmittedRef = useRef(false)
@@ -22,6 +23,10 @@ export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
     justSubmittedRef.current = false
     setValue('')
   }, [resetKey])
+
+  useEffect(() => {
+    if (isFilling) setValue('')
+  }, [isFilling])
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     justSubmittedRef.current = false
@@ -41,17 +46,18 @@ export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
     <div className="quiz-input-container">
       <input
         ref={inputRef}
-        className={`quiz-input${alreadyGuessed.length > 0 ? ' quiz-input--already' : ''}`}
+        className={`quiz-input${alreadyGuessed.length > 0 ? ' quiz-input--already' : ''}${isFilling ? ' quiz-input--filling' : ''}`}
         type="text"
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        placeholder="Type a station and press Enter..."
+        placeholder={isFilling ? 'filling in numbers…' : 'Type a station and press Enter...'}
         autoComplete="off"
         autoCorrect="off"
         autoCapitalize="none"
         spellCheck={false}
         autoFocus
+        disabled={isFilling}
       />
       {alreadyGuessed.length > 0 && (
         <span className="quiz-input-hint">
