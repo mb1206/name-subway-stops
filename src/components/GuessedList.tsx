@@ -1,5 +1,6 @@
 import { LINE_COLORS, lineTextColor } from '../data/lines'
-import { computeBoroughStats, BOROUGH_SHORT } from '../lib/borough'
+import { BOROUGH_SHORT } from '../lib/borough'
+import type { BoroughStat } from '../lib/borough'
 import type { Stop } from '../types'
 import './GuessedList.css'
 
@@ -7,18 +8,17 @@ const SEGMENTS = 40
 
 interface Props {
   stops: Stop[]
-  allStops: Stop[]
   guessedCount: number
   totalCount: number
   milesUnlocked: number
   totalMiles: number
+  boroughStats: BoroughStat[]
   onStopHover: (id: string | null) => void
 }
 
-export function GuessedList({ stops, allStops, guessedCount, totalCount, milesUnlocked, totalMiles, onStopHover }: Props) {
+export function GuessedList({ stops, guessedCount, totalCount, milesUnlocked, totalMiles, boroughStats, onStopHover }: Props) {
   const pct = totalCount > 0 ? Math.round(guessedCount / totalCount * 100) : 0
   const filled = totalCount > 0 ? Math.round(guessedCount / totalCount * SEGMENTS) : 0
-  const boroughStats = computeBoroughStats(stops, allStops)
 
   return (
     <aside className="sidebar" aria-label="Guessed stops">

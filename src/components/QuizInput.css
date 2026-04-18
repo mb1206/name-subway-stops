@@ -1,6 +1,6 @@
 .quiz-input-container {
   position: fixed;
-  top: 52px;
+  top: 12px;
   left: 16px;
   z-index: 10;
   width: min(380px, calc(100vw - 32px));
@@ -62,7 +62,7 @@
 /* ── Mobile: stay at top, full width, below expanded header ── */
 @media (max-width: 767px) {
   .quiz-input-container {
-    top: 94px; /* below mobile header (~82px) + 12px gap */
+    top: 68px; /* below collapsed mobile header (~56px) + 12px gap */
     width: calc(100vw - 32px);
   }
 }

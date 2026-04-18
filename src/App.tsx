@@ -8,6 +8,7 @@ import { GuessedList } from './components/GuessedList'
 import { SettingsMenu } from './components/SettingsMenu'
 import stopsData from './data/stops.json'
 import { computeMilesUnlocked, TOTAL_TRACK_MILES } from './lib/mileage'
+import { computeBoroughStats } from './lib/borough'
 import type { Stop, MapStyleId } from './types'
 import './App.css'
 
@@ -24,6 +25,7 @@ export default function App() {
   })
 
   const milesUnlocked = useMemo(() => computeMilesUnlocked(guessed), [guessed])
+  const boroughStats = useMemo(() => computeBoroughStats(guessedStops, stops), [guessedStops])
 
   const handleToggleStyle = useCallback(() => {
     setMapStyle(prev => prev === 'streets' ? 'schematic' : 'streets')
@@ -32,10 +34,10 @@ export default function App() {
   return (
     <div className="app" data-theme={mapStyle === 'schematic' ? 'light' : 'dark'}>
       <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} showBoroughDebug={showBoroughDebug} />
-      <Header guessedCount={guessedCount} totalCount={totalCount} />
+      <Header guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} />
       <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} />
       <ToastStack toasts={toasts} />
-      <GuessedList stops={guessedStops} allStops={stops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} onStopHover={setHoveredStopId} />
+      <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onStopHover={setHoveredStopId} />
       <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} showBoroughDebug={showBoroughDebug} onToggleBoroughDebug={() => setShowBoroughDebug(v => !v)} />
     </div>
   )

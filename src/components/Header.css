@@ -1,71 +1,77 @@
+/* Header is mobile-only — hidden on desktop */
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background: var(--ui-bg);
-  backdrop-filter: blur(8px);
-  color: var(--ui-text);
-  font-size: 14px;
-  border-bottom: 1px solid var(--ui-border);
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-.header-main {
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-}
-
-.header-title {
-  font-weight: 600;
-}
-
-/* Mobile stats row — hidden on desktop */
-.header-mobile-stats {
   display: none;
 }
 
 @media (max-width: 767px) {
-  .header-mobile-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 2px 16px 10px;
+  .header {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: var(--ui-bg);
+    backdrop-filter: blur(8px);
+    color: var(--ui-text);
+    border-bottom: 1px solid var(--ui-border);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 
-  .header-mobile-count {
+  .header-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px 6px;
+    gap: 8px;
+  }
+
+  .header-count {
     display: flex;
     align-items: baseline;
     gap: 3px;
+    flex: 1;
   }
 
-  .header-mobile-num {
+  .header-count-num {
     font-size: 20px;
     font-weight: 700;
-    color: var(--ui-text);
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
 
-  .header-mobile-sep {
+  .header-count-sep {
     font-size: 13px;
     color: var(--ui-text-dim);
     font-variant-numeric: tabular-nums;
   }
 
-  .header-mobile-pct {
+  .header-count-pct {
     font-size: 13px;
     color: var(--ui-text-secondary);
-    margin-left: auto;
     font-variant-numeric: tabular-nums;
+    margin-left: 4px;
   }
 
-  .header-mobile-progress {
+  .header-toggle {
+    background: none;
+    border: none;
+    color: var(--ui-text-dim);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 6px;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .header-toggle--open {
+    transform: rotate(180deg);
+    color: var(--ui-text);
+  }
+
+  .header-dots {
     display: flex;
     gap: 2px;
+    padding: 0 16px 10px;
   }
 
   .header-seg {
@@ -78,5 +84,71 @@
 
   .header-seg--filled {
     background: #f6c90e;
+  }
+
+  /* Expanded detail panel */
+  .header-detail {
+    padding: 10px 16px 14px;
+    border-top: 1px solid var(--ui-border);
+  }
+
+  .header-borough-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .header-borough-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-borough-name {
+    font-size: 10px;
+    color: var(--ui-text-dim);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    width: 64px;
+    flex-shrink: 0;
+  }
+
+  .header-borough-bar {
+    flex: 1;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--ui-progress-track);
+    overflow: hidden;
+  }
+
+  .header-borough-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: #f6c90e;
+    transition: width 0.4s ease;
+  }
+
+  .header-borough-pct {
+    font-size: 10px;
+    color: var(--ui-text-secondary);
+    font-variant-numeric: tabular-nums;
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .header-miles {
+    font-size: 11px;
+  }
+
+  .header-miles-val {
+    font-weight: 700;
+    color: var(--ui-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header-miles-label {
+    color: var(--ui-text-dim);
   }
 }
