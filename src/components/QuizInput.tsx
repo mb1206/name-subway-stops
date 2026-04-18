@@ -14,6 +14,10 @@ export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
   const alreadyGuessed = value.trim() !== '' ? (checkAlreadyGuessed?.(value) ?? []) : []
 
   useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
+
+  useEffect(() => {
     setValue('')
     inputRef.current?.focus()
   }, [resetKey])

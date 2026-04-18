@@ -1,9 +1,9 @@
 .quiz-input-container {
   position: fixed;
-  top: 12px;
-  left: 16px;
+  top: 24px;
+  left: 28px;
   z-index: 10;
-  width: min(380px, calc(100vw - 32px));
+  width: min(380px, calc(100vw - 56px));
 }
 
 .quiz-input {
