@@ -42,12 +42,6 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     inputRef.current?.focus()
   }
 
-  function handleFocus() {
-    // iOS Safari scrolls the body when an input is focused even if it's fixed;
-    // restore scroll to top after the browser's automatic scroll settles.
-    setTimeout(() => window.scrollTo(0, 0), 50)
-  }
-
   const hintNames = alreadyGuessed.map(s => s.name).join(', ')
 
   return (
@@ -59,7 +53,6 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        onFocus={handleFocus}
         placeholder="Type a station and press Enter..."
         autoComplete="off"
         autoCorrect="off"

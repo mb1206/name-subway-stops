@@ -7,7 +7,7 @@
   .header {
     display: block;
     position: fixed;
-    top: 0;
+    top: var(--vv-offset-top, 0px);
     left: 0;
     right: 0;
     z-index: 20;
