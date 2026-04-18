@@ -20,7 +20,6 @@ export default function App() {
   const [mapStyle, setMapStyle] = useState<MapStyleId>('streets')
   const [resetKey, setResetKey] = useState(0)
   const [hoveredStopId, setHoveredStopId] = useState<string | null>(null)
-  const [showBoroughDebug, setShowBoroughDebug] = useState(false)
   const [showShare, setShowShare] = useState(false)
 
   const { guessed, guessedStops, toasts, onInput, checkAlreadyGuessed, reset, guessedCount, totalCount } = useQuiz(stops, {
@@ -36,14 +35,14 @@ export default function App() {
 
   return (
     <div className="app" data-theme={mapStyle === 'schematic' ? 'light' : 'dark'}>
-      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} showBoroughDebug={showBoroughDebug} />
+      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} />
       <Header guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onShare={() => setShowShare(true)} />
       <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} />
       <ToastStack toasts={toasts} />
       <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onStopHover={setHoveredStopId} onShare={() => setShowShare(true)} />
       {showShare && <ShareModal guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onClose={() => setShowShare(false)} />}
       <HamburgerMenu />
-      <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} showBoroughDebug={showBoroughDebug} onToggleBoroughDebug={() => setShowBoroughDebug(v => !v)} />
+      <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} />
     </div>
   )
 }

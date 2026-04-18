@@ -5,11 +5,9 @@ interface Props {
   mapStyle: MapStyleId
   onToggleStyle: () => void
   onReset: () => void
-  showBoroughDebug: boolean
-  onToggleBoroughDebug: () => void
 }
 
-export function SettingsMenu({ mapStyle, onToggleStyle, onReset, showBoroughDebug, onToggleBoroughDebug }: Props) {
+export function SettingsMenu({ mapStyle, onToggleStyle, onReset }: Props) {
   function handleReset() {
     if (window.confirm('Reset all progress? This cannot be undone.')) {
       onReset()
@@ -32,14 +30,6 @@ export function SettingsMenu({ mapStyle, onToggleStyle, onReset, showBoroughDebu
           aria-pressed={mapStyle === 'schematic'}
         >
           Light
-        </button>
-        <div className="style-toggle-divider" />
-        <button
-          className={`style-toggle-opt${showBoroughDebug ? ' style-toggle-opt--active' : ''}`}
-          onClick={onToggleBoroughDebug}
-          aria-pressed={showBoroughDebug}
-        >
-          Boroughs
         </button>
         <div className="style-toggle-divider" />
         <button className="style-toggle-opt style-toggle-reset" onClick={handleReset} aria-label="Reset progress">
