@@ -1,9 +1,10 @@
 .quiz-input-container {
   position: fixed;
   top: 24px;
-  left: 28px;
+  right: calc(260px + 16px);
+  left: auto;
   z-index: 10;
-  width: min(380px, calc(100vw - 56px));
+  width: min(380px, calc(100vw - 260px - 56px));
 }
 
 .quiz-input {
@@ -64,6 +65,7 @@
   .quiz-input-container {
     top: 68px;
     left: 16px;
+    right: auto;
     width: calc(100vw - 32px);
     transition: top 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
