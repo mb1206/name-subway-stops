@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { X } from 'lucide-react'
+import { X, Binoculars } from 'lucide-react'
 import type { Stop } from '../types'
 import './QuizInput.css'
 
@@ -7,9 +7,11 @@ interface Props {
   onInput: (value: string) => void
   checkAlreadyGuessed?: (value: string) => Stop[]
   resetKey?: number
+  showHints?: boolean
+  onToggleHints?: () => void
 }
 
-export function QuizInput({ onInput, checkAlreadyGuessed, resetKey }: Props) {
+export function QuizInput({ onInput, checkAlreadyGuessed, resetKey, showHints, onToggleHints }: Props) {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const justSubmittedRef = useRef(false)
@@ -63,6 +65,17 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
       {value && (
         <button className="quiz-input-clear" onClick={handleClear} tabIndex={-1} aria-label="Clear input">
           <X size={14} />
+        </button>
+      )}
+      {onToggleHints && (
+        <button
+          className={`quiz-hint-toggle${showHints ? ' quiz-hint-toggle--active' : ''}`}
+          onPointerDown={e => e.preventDefault()}
+          onClick={onToggleHints}
+          aria-label={showHints ? 'Hide missing stops' : 'Show missing stops'}
+          aria-pressed={showHints}
+        >
+          <Binoculars size={15} aria-hidden="true" />
         </button>
       )}
       {alreadyGuessed.length > 0 && (

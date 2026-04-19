@@ -22,6 +22,7 @@ export default function App() {
   const [resetKey, setResetKey] = useState(0)
   const [hoveredStopId, setHoveredStopId] = useState<string | null>(null)
   const [showShare, setShowShare] = useState(false)
+  const [showHints, setShowHints] = useState(false)
 
   const { guessed, guessedStops, toasts, onInput, checkAlreadyGuessed, reset, guessedCount, totalCount } = useQuiz(stops, {
     onMatch: useCallback(() => setResetKey(k => k + 1), []),
@@ -80,9 +81,9 @@ export default function App() {
 
   return (
     <div className="app" data-theme={mapStyle === 'schematic' ? 'light' : 'dark'}>
-      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} />
+      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} showHints={showHints} />
       <Header guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onShare={() => setShowShare(true)} />
-      <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} />
+      <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} showHints={showHints} onToggleHints={() => setShowHints(v => !v)} />
       <ToastStack toasts={toasts} />
       <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onStopHover={setHoveredStopId} onShare={() => setShowShare(true)} />
       {showShare && <ShareModal guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} completedLines={completedLines} onClose={() => setShowShare(false)} />}

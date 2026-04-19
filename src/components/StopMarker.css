@@ -6,6 +6,16 @@
   cursor: default;
 }
 
+.stop-dot-hinted {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  cursor: default;
+}
+
 .stop-named {
   position: relative;
   animation: pop-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);

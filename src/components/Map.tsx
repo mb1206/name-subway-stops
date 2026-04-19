@@ -13,6 +13,7 @@ interface Props {
   guessed: Set<string>
   mapStyle: MapStyleId
   hoveredStopId?: string | null
+  showHints?: boolean
 }
 
 const INITIAL_VIEW = {
@@ -21,7 +22,7 @@ const INITIAL_VIEW = {
   zoom: 11,
 }
 
-export function QuizMap({ stops, guessed, mapStyle, hoveredStopId }: Props) {
+export function QuizMap({ stops, guessed, mapStyle, hoveredStopId, showHints }: Props) {
   const style = mapStyle === 'streets' ? STREETS_STYLE : SCHEMATIC_STYLE
 
   // For each line, collect all stop IDs on it (static — stops never change)
@@ -59,6 +60,7 @@ export function QuizMap({ stops, guessed, mapStyle, hoveredStopId }: Props) {
             stop={stop}
             named={guessed.has(stop.id)}
             highlighted={hoveredStopId === stop.id}
+            hinted={showHints && !guessed.has(stop.id)}
           />
         )
       )}

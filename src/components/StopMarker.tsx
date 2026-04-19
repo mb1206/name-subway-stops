@@ -7,9 +7,10 @@ interface Props {
   stop: Stop
   named: boolean
   highlighted?: boolean
+  hinted?: boolean
 }
 
-export function StopMarker({ stop, named, highlighted }: Props) {
+export function StopMarker({ stop, named, highlighted, hinted }: Props) {
   return (
     <Marker longitude={stop.coordinates[0]} latitude={stop.coordinates[1]} anchor="center">
       {named ? (
@@ -36,7 +37,7 @@ export function StopMarker({ stop, named, highlighted }: Props) {
           />
         </div>
       ) : (
-        <div className="stop-dot-unnamed" data-testid="stop-dot-unnamed" />
+        <div className={hinted ? 'stop-dot-hinted' : 'stop-dot-unnamed'} data-testid="stop-dot-unnamed" />
       )}
     </Marker>
   )
