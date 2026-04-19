@@ -1,4 +1,5 @@
-import { useState, useCallback, useMemo, useEffect } from 'react'
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react'
+import confetti from 'canvas-confetti'
 import { useQuiz } from './hooks/useQuiz'
 import { Header } from './components/Header'
 import { QuizInput } from './components/QuizInput'
@@ -21,6 +22,7 @@ export default function App() {
   const [resetKey, setResetKey] = useState(0)
   const [hoveredStopId, setHoveredStopId] = useState<string | null>(null)
   const [showShare, setShowShare] = useState(false)
+  const [showHints, setShowHints] = useState(false)
 
   const { guessed, guessedStops, toasts, onInput, checkAlreadyGuessed, reset, guessedCount, totalCount } = useQuiz(stops, {
     onMatch: useCallback(() => setResetKey(k => k + 1), []),
@@ -50,6 +52,15 @@ export default function App() {
     setMapStyle(prev => prev === 'streets' ? 'schematic' : 'streets')
   }, [])
 
+  const hasWon = guessedCount === totalCount && totalCount > 0
+  const prevWonRef = useRef(false)
+  useEffect(() => {
+    if (hasWon && !prevWonRef.current) {
+      confetti({ particleCount: 180, spread: 80, origin: { y: 0.5 } })
+    }
+    prevWonRef.current = hasWon
+  }, [hasWon])
+
   useEffect(() => {
     const vv = window.visualViewport
     if (!vv) return
@@ -70,9 +81,9 @@ export default function App() {
 
   return (
     <div className="app" data-theme={mapStyle === 'schematic' ? 'light' : 'dark'}>
-      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} />
+      <QuizMap stops={stops} guessed={guessed} mapStyle={mapStyle} hoveredStopId={hoveredStopId} showHints={showHints} />
       <Header guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onShare={() => setShowShare(true)} />
-      <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} />
+      <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} showHints={showHints} onToggleHints={() => setShowHints(v => !v)} />
       <ToastStack toasts={toasts} />
       <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onStopHover={setHoveredStopId} onShare={() => setShowShare(true)} />
       {showShare && <ShareModal guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} completedLines={completedLines} onClose={() => setShowShare(false)} />}
