@@ -49,6 +49,7 @@ export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles
             <span className="share-count-num">{guessedCount}</span>
             <span className="share-count-sep"> / {totalCount}</span>
             <span className="share-count-pct">{pct}%</span>
+            {guessedCount === totalCount && totalCount > 0 && <span className="share-count-party">🥳</span>}
           </div>
           <div className="share-progress">
             {Array.from({ length: SEGMENTS }, (_, i) => (

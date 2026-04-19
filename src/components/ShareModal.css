@@ -100,6 +100,12 @@
   font-variant-numeric: tabular-nums;
 }
 
+.share-count-party {
+  font-size: 22px;
+  line-height: 1;
+  margin-left: 6px;
+}
+
 .share-count-pct {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
