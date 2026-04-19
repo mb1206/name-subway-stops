@@ -1,5 +1,6 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect, useRef } from 'react'
 import { Map as MapGL } from 'react-map-gl/maplibre'
+import type { MapRef } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { StopMarker } from './StopMarker'
 import { RouteSegments } from './RouteSegments'
@@ -24,6 +25,19 @@ const INITIAL_VIEW = {
 
 export function QuizMap({ stops, guessed, mapStyle, hoveredStopId, showHints }: Props) {
   const style = mapStyle === 'streets' ? STREETS_STYLE : SCHEMATIC_STYLE
+  const mapRef = useRef<MapRef>(null)
+
+  useEffect(() => {
+    if (!showHints) return
+    const unguessed = stops.filter(s => !guessed.has(s.id))
+    if (unguessed.length === 0) return
+    const lngs = unguessed.map(s => s.coordinates[0])
+    const lats = unguessed.map(s => s.coordinates[1])
+    mapRef.current?.fitBounds(
+      [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]],
+      { padding: 60, duration: 800, maxZoom: 15 }
+    )
+  }, [showHints, stops, guessed])
 
   // For each line, collect all stop IDs on it (static — stops never change)
   const stopIdsByLine = useMemo(() => {
@@ -48,6 +62,7 @@ export function QuizMap({ stops, guessed, mapStyle, hoveredStopId, showHints }: 
 
   return (
     <MapGL
+      ref={mapRef}
       initialViewState={INITIAL_VIEW}
       style={{ width: '100%', height: '100%' }}
       mapStyle={style}
