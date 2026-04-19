@@ -4,8 +4,6 @@ import { NUMBER_STOP_IDS } from '../data/number-stop-ids'
 import type { Stop, Toast } from '../types'
 
 const CHEAT_PHRASE = 'beep boop'
-const DEBUG_PHRASE = 'debugdebug'
-const DEBUG_EXCLUDED = new Set(['D31', 'S09', 'D42'])
 
 const EMPTY_SET = new Set<string>()
 const STORAGE_KEY = 'nyc-subway-quiz-guessed'
@@ -71,20 +69,6 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
       timerIds.current.add(fadeId)
       timerIds.current.add(removeId)
       onMatch?.(toAdd[0])
-      return
-    }
-
-    if (input.trim().toLowerCase() === DEBUG_PHRASE) {
-      const toAdd = stops.filter(s => !DEBUG_EXCLUDED.has(s.id))
-      setGuessed(prev => {
-        const next = new Set(prev)
-        toAdd.forEach(s => next.add(s.id))
-        return next
-      })
-      setGuessedStops(prev => {
-        const prevIds = new Set(prev.map(s => s.id))
-        return [...prev, ...toAdd.filter(s => !prevIds.has(s.id))]
-      })
       return
     }
 
