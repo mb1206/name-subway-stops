@@ -1,4 +1,5 @@
-import { useState, useCallback, useMemo, useEffect } from 'react'
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react'
+import confetti from 'canvas-confetti'
 import { useQuiz } from './hooks/useQuiz'
 import { Header } from './components/Header'
 import { QuizInput } from './components/QuizInput'
@@ -49,6 +50,15 @@ export default function App() {
   const handleToggleStyle = useCallback(() => {
     setMapStyle(prev => prev === 'streets' ? 'schematic' : 'streets')
   }, [])
+
+  const hasWon = guessedCount === totalCount && totalCount > 0
+  const prevWonRef = useRef(false)
+  useEffect(() => {
+    if (hasWon && !prevWonRef.current) {
+      confetti({ particleCount: 180, spread: 80, origin: { y: 0.5 } })
+    }
+    prevWonRef.current = hasWon
+  }, [hasWon])
 
   useEffect(() => {
     const vv = window.visualViewport

@@ -29,6 +29,7 @@ export function GuessedList({ stops, guessedCount, totalCount, milesUnlocked, to
           <span className="sidebar-count-main">{guessedCount}</span>
           <span className="sidebar-count-sep"> / {totalCount}</span>
           <span className="sidebar-count-pct">{pct}%</span>
+          {guessedCount === totalCount && totalCount > 0 && <span>🥳</span>}
         </div>
         <div className="sidebar-progress">
           {Array.from({ length: SEGMENTS }, (_, i) => (
