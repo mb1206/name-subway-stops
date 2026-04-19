@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Map } from 'react-map-gl/maplibre'
+import { Map as MapGL } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { StopMarker } from './StopMarker'
 import { RouteSegments } from './RouteSegments'
@@ -46,7 +46,7 @@ export function QuizMap({ stops, guessed, mapStyle, hoveredStopId }: Props) {
   }, [stopIdsByLine, guessed])
 
   return (
-    <Map
+    <MapGL
       initialViewState={INITIAL_VIEW}
       style={{ width: '100%', height: '100%' }}
       mapStyle={style}
@@ -63,6 +63,6 @@ export function QuizMap({ stops, guessed, mapStyle, hoveredStopId }: Props) {
         )
       )}
       <RouteSegments guessed={guessed} />
-    </Map>
+    </MapGL>
   )
 }
