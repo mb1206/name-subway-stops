@@ -29,6 +29,23 @@ export default function App() {
   const milesUnlocked = useMemo(() => computeMilesUnlocked(guessed), [guessed])
   const boroughStats = useMemo(() => computeBoroughStats(guessedStops, stops), [guessedStops])
 
+  const stopIdsByLine = useMemo(() => {
+    const map = new Map<string, string[]>()
+    stops.forEach(stop => stop.lines.forEach(line => {
+      if (!map.has(line)) map.set(line, [])
+      map.get(line)!.push(stop.id)
+    }))
+    return map
+  }, [stops])
+
+  const completedLines = useMemo(() => {
+    const done = new Set<string>()
+    stopIdsByLine.forEach((ids, line) => {
+      if (ids.every(id => guessed.has(id))) done.add(line)
+    })
+    return done
+  }, [stopIdsByLine, guessed])
+
   const handleToggleStyle = useCallback(() => {
     setMapStyle(prev => prev === 'streets' ? 'schematic' : 'streets')
   }, [])
@@ -58,7 +75,7 @@ export default function App() {
       <QuizInput onInput={onInput} checkAlreadyGuessed={checkAlreadyGuessed} resetKey={resetKey} />
       <ToastStack toasts={toasts} />
       <GuessedList stops={guessedStops} guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onStopHover={setHoveredStopId} onShare={() => setShowShare(true)} />
-      {showShare && <ShareModal guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} onClose={() => setShowShare(false)} />}
+      {showShare && <ShareModal guessedCount={guessedCount} totalCount={totalCount} milesUnlocked={milesUnlocked} totalMiles={TOTAL_TRACK_MILES} boroughStats={boroughStats} completedLines={completedLines} onClose={() => setShowShare(false)} />}
       <HamburgerMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} />
       <SettingsMenu mapStyle={mapStyle} onToggleStyle={handleToggleStyle} onReset={reset} />
     </div>

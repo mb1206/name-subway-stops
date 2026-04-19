@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { X, Copy, Check } from 'lucide-react'
 import { BOROUGH_SHORT } from '../lib/borough'
+import { LINE_COLORS, LINE_ORDER, lineTextColor } from '../data/lines'
 import type { BoroughStat } from '../lib/borough'
 import './ShareModal.css'
 
@@ -13,10 +14,11 @@ interface Props {
   milesUnlocked: number
   totalMiles: number
   boroughStats: BoroughStat[]
+  completedLines: Set<string>
   onClose: () => void
 }
 
-export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles, boroughStats, onClose }: Props) {
+export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles, boroughStats, completedLines, onClose }: Props) {
   const [copied, setCopied] = useState(false)
 
   function handleCopy() {
@@ -71,6 +73,26 @@ export function ShareModal({ guessedCount, totalCount, milesUnlocked, totalMiles
           <span className="share-miles-val">{milesDisplay}</span>
           <span className="share-miles-label"> / {totalMiles} mi of track unlocked</span>
         </div>
+
+        {completedLines.size > 0 && (
+          <div className="share-lines">
+            <div className="share-lines-label">lines completed</div>
+            <div className="share-lines-row">
+              {LINE_ORDER.filter(line => completedLines.has(line)).map(line => (
+                <div
+                  key={line}
+                  className="share-line-badge"
+                  style={{ background: LINE_COLORS[line], color: lineTextColor(line) }}
+                >
+                  {line}
+                  <span className="share-line-check">
+                    <Check size={7} strokeWidth={3} aria-hidden="true" />
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="share-footer">
           <span className="share-url">{APP_URL}</span>
