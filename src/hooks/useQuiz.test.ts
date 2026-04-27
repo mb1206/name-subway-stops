@@ -141,4 +141,14 @@ describe('showBeepBoopHint', () => {
     act(() => result.current.onInput('nstop regular'))
     expect(result.current.showBeepBoopHint).toBe(false)
   })
+
+  it('becomes false again after beep boop cheat code is used', () => {
+    const { result } = renderHook(() => useQuiz(allStops))
+    act(() => result.current.onInput('nstop alpha'))
+    act(() => result.current.onInput('nstop beta'))
+    act(() => result.current.onInput('nstop gamma'))
+    expect(result.current.showBeepBoopHint).toBe(true)
+    act(() => result.current.onInput('beep boop'))
+    expect(result.current.showBeepBoopHint).toBe(false)
+  })
 })

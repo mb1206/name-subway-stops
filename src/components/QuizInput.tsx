@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { X, Binoculars, HelpCircle } from 'lucide-react'
+import { X, Binoculars, Zap } from 'lucide-react'
 import { CheatCodeModal } from './CheatCodeModal'
 import type { Stop } from '../types'
 import './QuizInput.css'
@@ -79,7 +79,7 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
               onClick={() => setShowCheatModal(true)}
               aria-label="Show cheat code"
             >
-              <HelpCircle size={15} aria-hidden="true" />
+              <Zap size={15} aria-hidden="true" />
             </button>
           )}
           {onToggleHints && (

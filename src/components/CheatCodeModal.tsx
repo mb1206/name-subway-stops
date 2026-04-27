@@ -13,8 +13,8 @@ export function CheatCodeModal({ onClose }: Props) {
           <X size={14} aria-hidden="true" />
         </button>
         <div className="cheat-heading">
-          <span className="cheat-emoji">🤖</span>
-          <span className="cheat-title">Cheat code</span>
+          <span className="cheat-emoji">⚡️</span>
+          <span className="cheat-title">Want a speed up?</span>
         </div>
         <p className="cheat-body">
           Hint: type <code className="cheat-code">beep boop</code> to fill in

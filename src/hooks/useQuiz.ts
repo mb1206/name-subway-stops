@@ -31,6 +31,7 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
     () => new Set(loadSavedStops(stops).map(s => s.id))
   )
   const [toasts, setToasts] = useState<Toast[]>([])
+  const [cheatUsed, setCheatUsed] = useState(false)
   const timerIds = useRef<Set<ReturnType<typeof setTimeout>>>(new Set())
   const stopById = useRef(new Map(stops.map(s => [s.id, s])))
 
@@ -45,6 +46,7 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
 
   const onInput = useCallback((input: string) => {
     if (input.trim().toLowerCase() === CHEAT_PHRASE) {
+      setCheatUsed(true)
       const toAdd = NUMBER_STOP_IDS
         .map(id => stopById.current.get(id))
         .filter((s): s is Stop => s !== undefined)
@@ -117,8 +119,8 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
   }, [])
 
   const showBeepBoopHint = useMemo(
-    () => [...guessed].filter(id => NUMBER_STOP_IDS_SET.has(id)).length > 2,
-    [guessed]
+    () => !cheatUsed && [...guessed].filter(id => NUMBER_STOP_IDS_SET.has(id)).length > 2,
+    [guessed, cheatUsed]
   )
 
   return {
