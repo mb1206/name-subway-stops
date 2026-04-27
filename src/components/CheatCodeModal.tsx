@@ -17,13 +17,14 @@ export function CheatCodeModal({ onClose }: Props) {
           <span className="cheat-title">Cheat code</span>
         </div>
         <p className="cheat-body">
-          Type <code className="cheat-code">beep boop</code> to fill in all
-          number-based stops — stops like <em>1 Av</em> or <em>42 St</em>.
+          Hint: type <code className="cheat-code">beep boop</code> to fill in
+          all number-based stops, e.g. <em>1 Av</em> or <em>42 St</em>.
         </p>
         <p className="cheat-caveat">
           Note: this only fills stops that begin directly with a number. You'll
-          still need to guess stops like <em>South 50th Street</em> since they
-          don't explicitly start with the number.
+          still need to guess stops like <em>South 50th Street</em>{' '}
+          (non-existent stop used on purpose 😅) since they don't explicitly
+          start with the number.
         </p>
       </div>
     </div>
