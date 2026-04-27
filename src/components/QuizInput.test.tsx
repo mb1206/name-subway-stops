@@ -37,4 +37,27 @@ describe('QuizInput', () => {
     await userEvent.type(input, 'fulton')
     expect(screen.getByText('Fulton St')).toBeInTheDocument()
   })
+
+  it('does not show help button when showBeepBoopHint is false', () => {
+    render(<QuizInput onInput={vi.fn()} showBeepBoopHint={false} />)
+    expect(screen.queryByLabelText(/cheat code/i)).not.toBeInTheDocument()
+  })
+
+  it('shows help button when showBeepBoopHint is true', () => {
+    render(<QuizInput onInput={vi.fn()} showBeepBoopHint={true} />)
+    expect(screen.getByLabelText(/cheat code/i)).toBeInTheDocument()
+  })
+
+  it('opens cheat code modal when help button is clicked', async () => {
+    render(<QuizInput onInput={vi.fn()} showBeepBoopHint={true} />)
+    await userEvent.click(screen.getByLabelText(/cheat code/i))
+    expect(screen.getByText(/beep boop/i)).toBeInTheDocument()
+  })
+
+  it('closes cheat code modal when close button is clicked', async () => {
+    render(<QuizInput onInput={vi.fn()} showBeepBoopHint={true} />)
+    await userEvent.click(screen.getByLabelText(/cheat code/i))
+    await userEvent.click(screen.getByLabelText(/close/i))
+    expect(screen.queryByText(/beep boop/i)).not.toBeInTheDocument()
+  })
 })

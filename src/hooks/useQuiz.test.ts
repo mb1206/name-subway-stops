@@ -104,3 +104,51 @@ describe('useQuiz', () => {
     expect(result.current.guessedCount).toBe(2)
   })
 })
+
+describe('showBeepBoopHint', () => {
+  // IDs taken from NUMBER_STOP_IDS; names chosen to be unambiguously matchable
+  const numStop1: Stop = { id: 'L06', name: 'nstop alpha', aliases: [], coordinates: [0, 0], lines: [] }
+  const numStop2: Stop = { id: 'F14', name: 'nstop beta', aliases: [], coordinates: [0, 0], lines: [] }
+  const numStop3: Stop = { id: '221', name: 'nstop gamma', aliases: [], coordinates: [0, 0], lines: [] }
+  const regularStop: Stop = { id: 'NONNUM', name: 'nstop regular', aliases: [], coordinates: [0, 0], lines: [] }
+  const allStops = [numStop1, numStop2, numStop3, regularStop]
+
+  beforeEach(() => { vi.useFakeTimers(); localStorage.clear() })
+  afterEach(() => vi.useRealTimers())
+
+  it('is false when no stops have been guessed', () => {
+    const { result } = renderHook(() => useQuiz(allStops))
+    expect(result.current.showBeepBoopHint).toBe(false)
+  })
+
+  it('is false after guessing exactly 2 number-based stops', () => {
+    const { result } = renderHook(() => useQuiz(allStops))
+    act(() => result.current.onInput('nstop alpha'))
+    act(() => result.current.onInput('nstop beta'))
+    expect(result.current.showBeepBoopHint).toBe(false)
+  })
+
+  it('becomes true after guessing more than 2 number-based stops', () => {
+    const { result } = renderHook(() => useQuiz(allStops))
+    act(() => result.current.onInput('nstop alpha'))
+    act(() => result.current.onInput('nstop beta'))
+    act(() => result.current.onInput('nstop gamma'))
+    expect(result.current.showBeepBoopHint).toBe(true)
+  })
+
+  it('stays false when only non-number stops are guessed', () => {
+    const { result } = renderHook(() => useQuiz(allStops))
+    act(() => result.current.onInput('nstop regular'))
+    expect(result.current.showBeepBoopHint).toBe(false)
+  })
+
+  it('becomes false again after beep boop cheat code is used', () => {
+    const { result } = renderHook(() => useQuiz(allStops))
+    act(() => result.current.onInput('nstop alpha'))
+    act(() => result.current.onInput('nstop beta'))
+    act(() => result.current.onInput('nstop gamma'))
+    expect(result.current.showBeepBoopHint).toBe(true)
+    act(() => result.current.onInput('beep boop'))
+    expect(result.current.showBeepBoopHint).toBe(false)
+  })
+})
