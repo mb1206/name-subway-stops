@@ -1,9 +1,10 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import { findAllMatches } from '../lib/matching'
 import { NUMBER_STOP_IDS } from '../data/number-stop-ids'
 import type { Stop, Toast } from '../types'
 
 const CHEAT_PHRASE = 'beep boop'
+const NUMBER_STOP_IDS_SET = new Set(NUMBER_STOP_IDS)
 
 const EMPTY_SET = new Set<string>()
 const STORAGE_KEY = 'nyc-subway-quiz-guessed'
@@ -115,6 +116,11 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
     setToasts([])
   }, [])
 
+  const showBeepBoopHint = useMemo(
+    () => [...guessed].filter(id => NUMBER_STOP_IDS_SET.has(id)).length > 2,
+    [guessed]
+  )
+
   return {
     guessed,
     guessedStops,
@@ -124,5 +130,6 @@ export function useQuiz(stops: Stop[], { onMatch }: Options = {}) {
     reset,
     guessedCount: guessed.size,
     totalCount: stops.length,
+    showBeepBoopHint,
   }
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { X, Binoculars } from 'lucide-react'
+import { X, Binoculars, HelpCircle } from 'lucide-react'
+import { CheatCodeModal } from './CheatCodeModal'
 import type { Stop } from '../types'
 import './QuizInput.css'
 
@@ -9,10 +10,12 @@ interface Props {
   resetKey?: number
   showHints?: boolean
   onToggleHints?: () => void
+  showBeepBoopHint?: boolean
 }
 
-export function QuizInput({ onInput, checkAlreadyGuessed, resetKey, showHints, onToggleHints }: Props) {
+export function QuizInput({ onInput, checkAlreadyGuessed, resetKey, showHints, onToggleHints, showBeepBoopHint }: Props) {
   const [value, setValue] = useState('')
+  const [showCheatModal, setShowCheatModal] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const justSubmittedRef = useRef(false)
   const alreadyGuessed = !justSubmittedRef.current && value.trim() !== '' ? (checkAlreadyGuessed?.(value) ?? []) : []
@@ -67,17 +70,32 @@ function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
           <X size={14} />
         </button>
       )}
-      {onToggleHints && (
-        <button
-          className={`quiz-hint-toggle${showHints ? ' quiz-hint-toggle--active' : ''}`}
-          onPointerDown={e => e.preventDefault()}
-          onClick={onToggleHints}
-          aria-label={showHints ? 'Hide missing stops' : 'Show missing stops'}
-          aria-pressed={showHints}
-        >
-          <Binoculars size={15} aria-hidden="true" />
-        </button>
+      {(onToggleHints || showBeepBoopHint) && (
+        <div className="quiz-input-actions">
+          {showBeepBoopHint && (
+            <button
+              className="quiz-help-toggle"
+              onPointerDown={e => e.preventDefault()}
+              onClick={() => setShowCheatModal(true)}
+              aria-label="Show cheat code"
+            >
+              <HelpCircle size={15} aria-hidden="true" />
+            </button>
+          )}
+          {onToggleHints && (
+            <button
+              className={`quiz-hint-toggle${showHints ? ' quiz-hint-toggle--active' : ''}`}
+              onPointerDown={e => e.preventDefault()}
+              onClick={onToggleHints}
+              aria-label={showHints ? 'Hide missing stops' : 'Show missing stops'}
+              aria-pressed={showHints}
+            >
+              <Binoculars size={15} aria-hidden="true" />
+            </button>
+          )}
+        </div>
       )}
+      {showCheatModal && <CheatCodeModal onClose={() => setShowCheatModal(false)} />}
       {alreadyGuessed.length > 0 && (
         <span className="quiz-input-hint">
           already named: <span className="quiz-input-hint-names">{hintNames}</span>

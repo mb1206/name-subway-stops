@@ -58,10 +58,17 @@
   color: var(--ui-text);
 }
 
-.quiz-hint-toggle {
+.quiz-input-actions {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.quiz-hint-toggle,
+.quiz-help-toggle {
   background: var(--ui-bg);
   backdrop-filter: blur(8px);
   border: 1px solid var(--ui-border-input);
@@ -80,6 +87,21 @@
   color: var(--ui-text);
   background: var(--ui-bg-solid);
   border-color: color-mix(in srgb, var(--ui-text) 35%, transparent);
+}
+
+.quiz-help-toggle {
+  animation: quiz-help-fade-in 0.3s ease-out;
+}
+
+.quiz-help-toggle:hover {
+  color: var(--ui-text);
+  background: var(--ui-bg-solid);
+  border-color: color-mix(in srgb, var(--ui-text) 35%, transparent);
+}
+
+@keyframes quiz-help-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Hint appears below the input on desktop (input is near top) */
@@ -122,7 +144,7 @@
     bottom: calc(100% + 6px);
   }
 
-  .quiz-hint-toggle {
+  .quiz-input-actions {
     top: auto;
     bottom: calc(100% + 8px);
   }
